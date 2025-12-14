@@ -1,0 +1,1729 @@
+<!doctype html>
+<html lang="vi" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#6750A4" />
+  <title>Profile — Nguyễn Văn Đại</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,0,0&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      color-scheme: light dark;
+      --radius-lg: 24px;
+
+      --md-primary: 103 80 164;
+      --md-on-primary: 255 255 255;
+      --md-primary-container: 234 221 255;
+      --md-on-primary-container: 33 0 93;
+
+      --md-tertiary: 125 82 96;
+      --md-bg: 248 246 251;
+      --md-surface: 255 255 255;
+      --md-surface-2: 245 243 250;
+      --md-surface-3: 239 236 246;
+      --md-outline: 203 198 214;
+
+      --md-text: 28 27 31;
+      --md-muted: 93 88 99;
+      --md-link: 18 99 209;
+
+      --e1: 0 1px 2px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
+      --e2: 0 6px 14px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+      --e3: 0 14px 30px rgba(0,0,0,.14), 0 6px 14px rgba(0,0,0,.08);
+
+      --ring: 0 0 0 4px rgba(103,80,164,.18);
+    }
+    html[data-theme="dark"]{
+      --md-primary: 208 188 255;
+      --md-on-primary: 55 30 115;
+      --md-primary-container: 79 55 139;
+      --md-on-primary-container: 234 221 255;
+
+      --md-tertiary: 239 184 200;
+      --md-bg: 16 14 20;
+      --md-surface: 24 22 29;
+      --md-surface-2: 30 27 35;
+      --md-surface-3: 36 32 42;
+      --md-outline: 73 69 79;
+
+      --md-text: 231 224 236;
+      --md-muted: 200 191 207;
+      --md-link: 156 199 255;
+
+      --e1: 0 1px 2px rgba(0,0,0,.40);
+      --e2: 0 8px 20px rgba(0,0,0,.45);
+      --e3: 0 18px 40px rgba(0,0,0,.55);
+
+      --ring: 0 0 0 4px rgba(208,188,255,.20);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      background: rgb(var(--md-bg));
+      color: rgb(var(--md-text));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a{ color: rgb(var(--md-link)); text-decoration:none; }
+    a:hover{ text-decoration: underline; }
+
+    .icon{
+      font-family: "Material Symbols Rounded";
+      font-weight: 500;
+      font-style: normal;
+      font-size: 22px;
+      line-height: 1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      user-select:none;
+      /* Force filled icons so they don't blend with white backgrounds (use FILL=1) */
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0;
+    }
+
+    .appbar{
+      position: sticky; top:0; z-index: 20;
+      backdrop-filter: blur(12px);
+      background: color-mix(in oklab, rgb(var(--md-surface)) 78%, transparent);
+      border-bottom: 1px solid rgba(var(--md-outline), .55);
+    }
+    .appbar-inner{
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 14px 16px;
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width: 220px; }
+    .brand-badge{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(var(--md-primary),.90), rgba(var(--md-tertiary),.75));
+      box-shadow: var(--e1);
+      display:grid; place-items:center;
+    }
+    .brand h1{ font-size: 16px; margin:0; letter-spacing: .2px; font-weight: 600; }
+    .brand p{ margin:2px 0 0 0; font-size: 12px; color: rgb(var(--md-muted)); }
+    .app-actions{
+      display:flex; gap:10px; align-items:center;
+      flex-wrap: wrap; justify-content:flex-end;
+    }
+
+    .container{ max-width: 1160px; margin: 0 auto; padding: 18px 16px 42px; }
+    .grid{ display:grid; grid-template-columns: 360px 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } .brand{ min-width:0; } }
+
+    .card{
+      border-radius: var(--radius-lg);
+      background: rgb(var(--md-surface));
+      box-shadow: var(--e1);
+      border: 1px solid rgba(var(--md-outline), .45);
+      overflow: hidden;
+    }
+    .card.pad{ padding: 16px; }
+    .subtle{ background: rgb(var(--md-surface-2)); }
+
+    .row{ display:flex; gap: 12px; align-items:center; }
+    .stack{ display:grid; gap: 10px; }
+    .muted{ color: rgb(var(--md-muted)); }
+
+    .btn{
+      position: relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: rgb(var(--md-surface));
+      color: rgb(var(--md-text));
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .08s ease, background .15s ease, box-shadow .15s ease;
+      user-select:none;
+      overflow:hidden;
+      white-space: nowrap;
+    }
+    .btn:hover{ background: rgb(var(--md-surface-2)); }
+    .btn:active{ transform: scale(.98); }
+    .btn:focus{ outline:none; box-shadow: var(--ring); }
+    .btn.primary{ border-color: transparent; background: rgb(var(--md-primary)); color: rgb(var(--md-on-primary)); }
+    .btn.primary:hover{ background: color-mix(in oklab, rgb(var(--md-primary)) 92%, black); }
+    .btn.tonal{ border-color: transparent; background: rgb(var(--md-primary-container)); color: rgb(var(--md-on-primary-container)); }
+    .btn.icon{ width: 40px; padding:0; }
+    .btn.danger{ border-color: rgba(239,68,68,.55); }
+    .btn.danger:hover{ background: rgba(239,68,68,.08); }
+
+    .btn .ripple{
+      position:absolute; inset:0;
+      pointer-events:none;
+      background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.35), transparent 55%);
+      opacity:0;
+      transition: opacity .35s ease;
+    }
+    .btn.primary .ripple{ background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.45), transparent 55%); }
+    .btn:active .ripple{ opacity:1; transition: opacity .05s ease; }
+
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: rgb(var(--md-surface));
+      font-weight: 600;
+      font-size: 13px;
+      color: rgb(var(--md-text));
+    }
+    .chips{ display:flex; flex-wrap: wrap; gap: 10px; }
+    .divider{ height:1px; background: rgba(var(--md-outline), .45); margin: 14px 0; }
+
+    .section-title{ display:flex; align-items:center; justify-content:space-between; gap: 10px; margin-bottom: 10px; }
+    .section-title h2{ margin:0; font-size: 15px; letter-spacing: .2px; }
+
+    .field{ display:grid; gap: 6px; }
+    .input{
+      height: 42px;
+      border-radius: 14px;
+      padding: 0 12px;
+      border: 1px solid rgba(var(--md-outline), .60);
+      background: rgb(var(--md-surface));
+      color: rgb(var(--md-text));
+      outline:none;
+      transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .input:focus{ border-color: rgba(var(--md-primary), .85); box-shadow: var(--ring); }
+    textarea.input{ height:auto; padding: 10px 12px; min-height: 90px; resize: vertical; }
+
+    .cover{
+      height: 62px;
+      background: radial-gradient(900px 220px at 20% 20%, rgba(var(--md-primary), .40), transparent 50%),
+                  radial-gradient(700px 240px at 85% 60%, rgba(var(--md-tertiary), .35), transparent 55%),
+                  linear-gradient(135deg, rgba(var(--md-primary), .22), rgba(var(--md-tertiary), .18));
+    }
+    .profile-head{ padding: 0 16px 16px; margin-top: -44px; }
+    .avatar{
+      width: 92px; height: 92px;
+      border-radius: 28px;
+      background: rgb(var(--md-surface-3));
+      border: 4px solid rgb(var(--md-surface));
+      box-shadow: var(--e2);
+      display:grid; place-items:center;
+      overflow:hidden;
+      position: relative;
+    }
+    .avatar img{ width:100%; height:100%; object-fit: cover; display:block; }
+    .avatar .cam{
+      position:absolute; right:8px; bottom:8px;
+      width: 30px; height: 30px;
+      border-radius: 12px;
+      background: color-mix(in oklab, rgb(var(--md-surface)) 75%, transparent);
+      border: 1px solid rgba(var(--md-outline), .55);
+      box-shadow: var(--e1);
+      display:grid; place-items:center;
+    }
+    .name{ margin: 10px 0 2px; font-size: 20px; font-weight: 800; letter-spacing: .2px; }
+    .role{ font-size: 13px; color: rgb(var(--md-muted)); display:flex; gap: 8px; align-items:center; flex-wrap:wrap; }
+
+    .stats{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+    .stat{
+      padding: 12px;
+      border-radius: 18px;
+      background: rgb(var(--md-surface-2));
+      border: 1px solid rgba(var(--md-outline), .45);
+      text-align:center;
+    }
+    .stat b{ display:block; font-size: 16px; }
+    .stat span{ font-size: 12px; color: rgb(var(--md-muted)); }
+
+    .projects{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    @media (max-width: 560px){ .projects{ grid-template-columns: 1fr; } .stats{ grid-template-columns: 1fr 1fr; } }
+    .p-card{
+      padding: 14px;
+      border-radius: 22px;
+      background: rgb(var(--md-surface));
+      border: 1px solid rgba(var(--md-outline), .45);
+      box-shadow: var(--e1);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .p-card:hover{ transform: translateY(-2px); box-shadow: var(--e2); }
+    .p-top{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
+    .p-title{ margin:0; font-size: 14px; font-weight: 800; }
+    .p-desc{ margin: 8px 0 10px; font-size: 13px; color: rgb(var(--md-muted)); line-height: 1.45; }
+    .p-tags{ display:flex; gap: 8px; flex-wrap: wrap; }
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgb(var(--md-surface-2));
+      border: 1px solid rgba(var(--md-outline), .45);
+      color: rgb(var(--md-text));
+      font-weight: 700;
+    }
+
+    .foot{
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgb(var(--md-surface-2));
+      border: 1px solid rgba(var(--md-outline), .45);
+      color: rgb(var(--md-muted));
+      font-size: 12px;
+      display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap;
+    }
+
+    /* Backdrop / Modal */
+    .backdrop{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.42);
+      display:none;
+      z-index: 60;
+      padding: 18px;
+    }
+    .backdrop.show{ display:grid; place-items:center; }
+    .modal{
+      width: min(920px, 100%);
+      max-height: min(86vh, 900px);
+      overflow:auto;
+      border-radius: 26px;
+      background: rgb(var(--md-surface));
+      border: 1px solid rgba(var(--md-outline), .55);
+      box-shadow: var(--e3);
+    }
+    .modal-head{
+      position: sticky; top:0; z-index: 2;
+      padding: 14px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+      background: color-mix(in oklab, rgb(var(--md-surface)) 86%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(var(--md-outline), .45);
+    }
+    .modal-head h3{ margin:0; font-size: 15px; letter-spacing:.2px; }
+    .modal-body{ padding: 14px; display:grid; gap: 12px; }
+    .modal-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 720px){ .modal-grid{ grid-template-columns: 1fr; } }
+    .hint{ font-size: 12px; color: rgb(var(--md-muted)); margin-top: 4px; }
+
+    .kbd{
+      font-size: 12px; font-weight: 700;
+      padding: 3px 8px; border-radius: 10px;
+      border: 1px solid rgba(var(--md-outline),.55);
+      background: rgb(var(--md-surface-2));
+    }
+
+    /* Toast */
+    .toast-wrap{ position: fixed; right: 14px; top: 14px; z-index: 80; display:grid; gap: 8px; }
+    .toast{
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: color-mix(in oklab, rgb(var(--md-surface)) 86%, transparent);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--e2);
+      display:flex; gap: 10px; align-items:flex-start;
+      max-width: 380px;
+    }
+    .toast b{ display:block; font-size: 13px; }
+    .toast p{ margin: 2px 0 0; font-size: 12px; color: rgb(var(--md-muted)); }
+    .toast.ok{ border-color: rgba(34,197,94,.45); }
+    .toast.err{ border-color: rgba(239,68,68,.45); }
+
+    /* Project editor */
+    .plist{ display:grid; gap: 10px; }
+    .pitem{
+      border-radius: 18px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: rgb(var(--md-surface));
+      padding: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .pitem.dragging{ opacity: .85; box-shadow: var(--e2); outline: 2px dashed rgba(var(--md-primary), .55); outline-offset: 2px; }
+    .pitem .head{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
+    .pitem .left{ display:flex; align-items:center; gap: 10px; min-width: 0; }
+    .drag-handle{
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: rgb(var(--md-surface-2));
+      display:grid; place-items:center;
+      cursor: grab;
+      user-select:none;
+      flex: 0 0 auto;
+    }
+    .drag-handle:active{ cursor: grabbing; }
+    .pitem-title{ display:grid; gap: 2px; min-width: 0; }
+    .pitem-title b{ font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pitem-title small{ font-size: 12px; color: rgb(var(--md-muted)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .pitem .grid3{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    @media (max-width: 720px){ .pitem .grid3{ grid-template-columns: 1fr; } }
+    .mini{ height: 38px; border-radius: 12px; padding: 0 10px; font-size: 13px; }
+
+    .badge{
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: rgb(var(--md-surface-2));
+      color: rgb(var(--md-text));
+      font-weight: 700;
+      display:inline-flex; gap: 6px; align-items:center;
+    }
+    .dropzone{
+      border-radius: 18px;
+      padding: 10px 12px;
+      border: 1px dashed rgba(var(--md-outline), .75);
+      color: rgb(var(--md-muted));
+      font-size: 12px;
+      text-align:center;
+      background: color-mix(in oklab, rgb(var(--md-surface-2)) 86%, transparent);
+    }
+    .dropzone.on{ border-color: rgba(var(--md-primary), .75); box-shadow: var(--ring); }
+
+    /* Small dialog */
+    .dlg{
+      width: min(560px, 100%);
+      border-radius: 26px;
+      background: rgb(var(--md-surface));
+      border: 1px solid rgba(var(--md-outline), .55);
+      box-shadow: var(--e3);
+      overflow:hidden;
+    }
+    .dlg-head{
+      padding: 14px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+      border-bottom: 1px solid rgba(var(--md-outline), .45);
+      background: color-mix(in oklab, rgb(var(--md-surface)) 86%, transparent);
+      backdrop-filter: blur(12px);
+    }
+    .dlg-head h4{ margin:0; font-size: 15px; letter-spacing:.2px; }
+    .dlg-body{ padding: 14px; display:grid; gap: 12px; }
+    .dlg-actions{ padding: 14px; display:flex; gap: 10px; justify-content:flex-end; border-top: 1px solid rgba(var(--md-outline), .45); }
+    .sr-only{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+    /* MOBILE DOCK */
+    .mobile-dock{
+      position: fixed;
+      left: 12px; right: 12px; bottom: 12px;
+      z-index: 50;
+      padding: 10px;
+      border-radius: 22px;
+      background: color-mix(in oklab, rgb(var(--md-surface)) 86%, transparent);
+      border: 1px solid rgba(var(--md-outline), .55);
+      box-shadow: var(--e2);
+      backdrop-filter: blur(14px);
+      display: none;
+    }
+    .dock-grid{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .dock-btn{
+      height: 52px;
+      border-radius: 18px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: rgb(var(--md-surface));
+      display: grid;
+      place-items: center;
+      gap: 2px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .08s ease, background .15s ease;
+    }
+    .dock-btn:hover{ background: rgb(var(--md-surface-2)); }
+    .dock-btn:active{ transform: scale(.98); }
+    .dock-btn .label{ font-size: 11px; color: rgb(var(--md-muted)); font-weight: 700; }
+    .dock-btn.primary{
+      border-color: transparent;
+      background: rgb(var(--md-primary));
+      color: rgb(var(--md-on-primary));
+    }
+    .dock-btn.primary .label{ color: rgba(var(--md-on-primary), .9); }
+
+    @media (max-width: 820px){
+      .app-actions{ display:none; }
+      .mobile-dock{ display:block; }
+      .container{ padding-bottom: 110px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
+
+  <header class="appbar">
+    <div class="appbar-inner">
+      <div class="brand">
+        <div class="brand-badge"><span class="icon">person</span></div>
+        <div>
+          <h1>Hồ sơ cá nhân</h1>
+          <p>Material Design • Firebase Sync</p>
+        </div>
+      </div>
+
+      <div class="app-actions">
+        <button class="btn icon" id="themeBtn" title="Đổi giao diện (Dark/Light)" aria-label="Đổi giao diện">
+          <span class="icon" id="themeIcon">dark_mode</span><span class="ripple"></span>
+        </button>
+
+        <button class="btn tonal" id="lockBtn" title="Đặt/đổi mật khẩu chỉnh sửa">
+          <span class="icon">lock</span>Khoá sửa<span class="ripple"></span>
+        </button>
+
+        <button class="btn tonal" id="exportBtn" title="Xuất JSON">
+          <span class="icon">download</span>Export<span class="ripple"></span>
+        </button>
+
+        <button class="btn tonal" id="importBtn" title="Nhập JSON">
+          <span class="icon">upload</span>Import<span class="ripple"></span>
+        </button>
+
+        <button class="btn primary" id="editBtn" title="Chỉnh sửa hồ sơ">
+          <span class="icon">edit</span>Chỉnh sửa<span class="ripple"></span>
+        </button>
+
+        <input class="sr-only" type="file" id="importFile" accept="application/json,.json">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <aside class="card">
+        <div class="cover"></div>
+
+        <div class="profile-head">
+          <div class="row" style="justify-content:space-between;">
+            <div class="row">
+              <div class="avatar" title="Ảnh đại diện">
+                <img id="ui_avatar" src="" alt="Avatar">
+                <div class="cam" title="Đổi ảnh (vào Chỉnh sửa)">
+                  <span class="icon" style="font-size:18px">photo_camera</span>
+                </div>
+              </div>
+            </div>
+
+            <span class="chip" id="syncBadge"><span class="icon" style="font-size:18px">cloud</span>Offline</span>
+          </div>
+
+          <div class="name" id="ui_name"></div>
+          <div class="role">
+            <span class="chip"><span class="icon" style="font-size:18px">work</span><span id="ui_title"></span></span>
+            <span class="chip"><span class="icon" style="font-size:18px">location_on</span><span id="ui_location"></span></span>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><b id="ui_stat_projects"></b><span>Dự án</span></div>
+            <div class="stat"><b id="ui_stat_followers"></b><span>Theo dõi</span></div>
+            <div class="stat"><b id="ui_stat_rating"></b><span>Đánh giá</span></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="stack">
+            <div class="section-title"><h2>Liên hệ</h2></div>
+
+            <div class="row">
+              <span class="icon">call</span>
+              <div>
+                <div style="font-weight:700" id="ui_phone"></div>
+                <div class="muted" style="font-size:12px">Hotline / Zalo</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <span class="icon">mail</span>
+              <div>
+                <div style="font-weight:700"><a id="ui_email_link" href="#">-</a></div>
+                <div class="muted" style="font-size:12px">Email công việc</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <span class="icon">language</span>
+              <div>
+                <div style="font-weight:700"><a id="ui_site_link" href="#" target="_blank" rel="noopener">-</a></div>
+                <div class="muted" style="font-size:12px">Portfolio</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="stack">
+            <div class="section-title"><h2>Kỹ năng nổi bật</h2></div>
+            <div class="chips" id="ui_skills"></div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="stack">
+        <div class="card pad">
+          <div class="section-title">
+            <h2>Giới thiệu</h2>
+            <span class="chip"><span class="icon" style="font-size:18px">verified</span>Pro</span>
+          </div>
+          <p class="muted" id="ui_bio" style="margin:0; line-height:1.6;"></p>
+
+          <div class="divider"></div>
+
+          <div class="projects">
+            <div class="p-card">
+              <div class="p-top">
+                <p class="p-title">Sync Firebase</p>
+                <span class="chip"><span class="icon" style="font-size:18px">cloud_sync</span>Realtime</span>
+              </div>
+              <p class="p-desc">Dữ liệu lưu Firestore theo UID (đăng nhập ẩn danh) và tự đồng bộ đa thiết bị.</p>
+              <div class="p-tags"><span class="tag">Auth</span><span class="tag">Firestore</span></div>
+            </div>
+            <div class="p-card">
+              <div class="p-top">
+                <p class="p-title">Khoá chỉnh sửa</p>
+                <span class="chip"><span class="icon" style="font-size:18px">lock</span>Protected</span>
+              </div>
+              <p class="p-desc">Bật mật khẩu để ngăn người khác mở modal chỉnh sửa trên máy.</p>
+              <div class="p-tags"><span class="tag">WebCrypto</span><span class="tag">Dialog</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="section-title">
+            <h2>Dự án nổi bật</h2>
+            <div class="row">
+              <input class="input" id="search" placeholder="Tìm dự án..." />
+              <button class="btn icon" id="resetProfileBtn" title="Reset hồ sơ">
+                <span class="icon">restart_alt</span><span class="ripple"></span>
+              </button>
+            </div>
+          </div>
+          <div class="projects" id="projectGrid"></div>
+        </div>
+
+        <div class="card pad subtle">
+          <div class="section-title">
+            <h2>Gửi yêu cầu hợp tác</h2>
+            <span class="chip"><span class="icon" style="font-size:18px">shield</span>Anti-spam</span>
+          </div>
+
+          <div class="projects" style="grid-template-columns: 1fr 1fr;">
+            <label class="field"><span class="muted" style="font-size:12px">Họ tên</span><input class="input" placeholder="Ví dụ: Nguyễn A" /></label>
+            <label class="field"><span class="muted" style="font-size:12px">Số điện thoại</span><input class="input" placeholder="Ví dụ: 09xx..." /></label>
+          </div>
+          <div class="projects" style="grid-template-columns: 1fr;">
+            <label class="field"><span class="muted" style="font-size:12px; margin-top:6px">Nội dung</span><input class="input" placeholder="Bạn cần website/landing page/hệ thống quản trị..." /></label>
+          </div>
+
+          <div class="row" style="justify-content:flex-end; margin-top: 10px;">
+            <button class="btn primary"><span class="icon">send</span>Gửi yêu cầu<span class="ripple"></span></button>
+          </div>
+
+          <div class="foot">
+            <span>Bản quyền thuộc về Tony Nguyễn</span>
+            <span>© <span id="year"></span> Profile</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- EDIT MODAL -->
+  <div class="backdrop" id="backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div class="row" style="gap:10px;">
+          <span class="icon">edit_square</span>
+          <h3 id="modalTitle">Chỉnh sửa hồ sơ</h3>
+        </div>
+        <div class="row">
+          <button class="btn" id="closeModalBtn"><span class="icon">close</span>Đóng<span class="ripple"></span></button>
+          <button class="btn primary" id="saveBtn"><span class="icon">save</span>Lưu<span class="ripple"></span></button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="card pad subtle" style="border-radius:22px;">
+          <div class="section-title" style="margin-bottom:6px;">
+            <h2>Ảnh đại diện</h2>
+            <span class="chip"><span class="icon" style="font-size:18px">cloud_done</span>Local + Firebase</span>
+          </div>
+          <div class="row" style="align-items:flex-start; flex-wrap:wrap;">
+            <div class="avatar" style="width:110px;height:110px;border-radius:34px;">
+              <img id="previewAvatar" src="" alt="Avatar preview">
+            </div>
+            <div class="stack" style="flex:1; min-width: 220px;">
+              <label class="field">
+                <span class="muted" style="font-size:12px">Chọn ảnh (jpg/png)</span>
+                <input class="input" style="padding: 9px 12px;" type="file" id="avatarFile" accept="image/*">
+                <div class="hint">Ảnh lưu base64 (đừng chọn ảnh quá lớn).</div>
+              </label>
+              <div class="row" style="justify-content:flex-start;">
+                <button class="btn" id="removeAvatarBtn"><span class="icon">delete</span>Xoá ảnh<span class="ripple"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad" style="border-radius:22px;">
+          <div class="section-title"><h2>Thông tin cơ bản</h2></div>
+          <div class="modal-grid">
+            <label class="field"><span class="muted" style="font-size:12px">Họ tên</span><input class="input" id="f_name"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Chức danh</span><input class="input" id="f_title"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Vị trí</span><input class="input" id="f_location"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Số điện thoại</span><input class="input" id="f_phone"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Email</span><input class="input" id="f_email"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Website</span><input class="input" id="f_site"><div class="hint">Thiếu http/https sẽ tự thêm https://</div></label>
+          </div>
+          <div style="height:10px"></div>
+          <label class="field"><span class="muted" style="font-size:12px">Giới thiệu</span><textarea class="input" id="f_bio"></textarea></label>
+        </div>
+
+        <div class="card pad subtle" style="border-radius:22px;">
+          <div class="section-title"><h2>Stats & Kỹ năng</h2></div>
+          <div class="modal-grid">
+            <label class="field"><span class="muted" style="font-size:12px">Dự án</span><input class="input" id="f_projects" inputmode="numeric"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Theo dõi</span><input class="input" id="f_followers"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Đánh giá</span><input class="input" id="f_rating"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Kỹ năng (phân cách ,)</span><input class="input" id="f_skills"></label>
+          </div>
+        </div>
+
+        <div class="card pad" style="border-radius:22px;">
+          <div class="section-title" style="align-items:flex-start;">
+            <div class="stack" style="gap:4px;">
+              <h2 style="margin:0;">Quản lý “Dự án nổi bật”</h2>
+              <div class="hint">Kéo thả để sắp xếp • Nhấn <span class="kbd">↑</span>/<span class="kbd">↓</span> để đổi nhanh.</div>
+            </div>
+            <button class="btn tonal" id="addProjectBtn"><span class="icon">add</span>Thêm dự án<span class="ripple"></span></button>
+          </div>
+
+          <div class="dropzone" id="dropzone">Thả để đổi vị trí dự án</div>
+          <div style="height:10px"></div>
+          <div class="plist" id="projectList"></div>
+        </div>
+
+        <div class="hint">
+          Firebase: lưu tại <code>users/{uid}/profile/main</code> • LocalStorage: <code>profile_data_v1</code>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIALOG -->
+  <div class="backdrop" id="dlgBackdrop" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <div class="dlg">
+      <div class="dlg-head">
+        <div class="row" style="gap:10px;">
+          <span class="icon" id="dlgIcon">lock</span>
+          <h4 id="dlgTitle">Dialog</h4>
+        </div>
+        <button class="btn icon" id="dlgCloseX" title="Đóng"><span class="icon">close</span><span class="ripple"></span></button>
+      </div>
+      <div class="dlg-body" id="dlgBody"></div>
+      <div class="dlg-actions" id="dlgActions"></div>
+    </div>
+  </div>
+
+<!-- MOBILE DOCK -->
+<nav class="mobile-dock" aria-label="Quick actions">
+    <div class="dock-grid">
+        <button class="dock-btn" id="dockTheme" title="Dark/Light">
+            <span class="icon" style="color: rgb(var(--md-text))">dark_mode</span><div class="label">Theme</div>
+        </button>
+        <button class="dock-btn" id="dockExport" title="Export">
+            <span class="icon" style="color: rgb(var(--md-text))">download</span><div class="label">Export</div>
+        </button>
+        <button class="dock-btn" id="dockImport" title="Import">
+            <span class="icon" style="color: rgb(var(--md-text))">upload</span><div class="label">Import</div>
+        </button>
+        <button class="dock-btn" id="dockLock" title="Đặt/đổi mật khẩu">
+            <span class="icon" style="color: rgb(var(--md-text))">lock</span><div class="label">Khoá</div>
+        </button>
+        <button class="dock-btn primary" id="dockEdit" title="Chỉnh sửa">
+            <span class="icon" style="color: rgb(var(--md-on-primary))">edit</span><div class="label">Edit</div>
+        </button>
+    </div>
+</nav>
+
+  <script type="module">
+    // ===== Firebase (Auth anonymous + Firestore) =====
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    // ✅ THAY CONFIG CỦA BẠN
+    const firebaseConfig = {
+    apiKey: "AIzaSyB-Zjhuv0L9RCbZi9izl_ICS7o45ezfsuM",
+    authDomain: "profile-8b19c.firebaseapp.com",
+    projectId: "profile-8b19c",
+    storageBucket: "profile-8b19c.firebasestorage.app",
+    messagingSenderId: "620953315530",
+    appId: "1:620953315530:web:1c6da45f01ed99e1c9ec33",
+    measurementId: "G-Z7H1E0BEL4"
+    };
+
+    // ===== Helpers =====
+    const $ = (s) => document.querySelector(s);
+    const te = new TextEncoder();
+    const td = new TextDecoder();
+
+    function escapeHtml(str){
+      return String(str ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    // Ripple origin
+    document.addEventListener('pointerdown', (e) => {
+      const btn = e.target.closest?.('.btn, .dock-btn');
+      if(!btn) return;
+      const r = btn.getBoundingClientRect();
+      btn.style.setProperty('--x', (((e.clientX - r.left) / r.width) * 100) + '%');
+      btn.style.setProperty('--y', (((e.clientY - r.top) / r.height) * 100) + '%');
+    });
+
+    // Toast
+    const toastWrap = $("#toastWrap");
+    function toast(type, title, msg){
+      const el = document.createElement('div');
+      el.className = `toast ${type === 'err' ? 'err' : 'ok'}`;
+      el.innerHTML = `
+        <span class="icon">${type === 'err' ? 'error' : 'check_circle'}</span>
+        <div><b>${escapeHtml(title)}</b><p>${escapeHtml(msg || '')}</p></div>
+      `;
+      toastWrap.appendChild(el);
+      setTimeout(()=>{ el.style.opacity = '0'; el.style.transform = 'translateY(-2px)'; }, 2400);
+      setTimeout(()=>{ el.remove(); }, 2900);
+    }
+
+    // Theme
+    const root = document.documentElement;
+    const themeIcon = $("#themeIcon");
+    const getPreferred = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    function applyTheme(mode){
+      if(mode === 'auto') root.setAttribute('data-theme', getPreferred());
+      else root.setAttribute('data-theme', mode);
+      const current = root.getAttribute('data-theme');
+      themeIcon.textContent = current === 'dark' ? 'light_mode' : 'dark_mode';
+      $('meta[name="theme-color"]').setAttribute('content', current === 'dark' ? '#2B2335' : '#6750A4');
+    }
+    applyTheme(localStorage.getItem('profile_theme') || 'auto');
+    $("#themeBtn").addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('profile_theme', next);
+      applyTheme(next);
+    });
+
+    // Storage
+    const STORAGE_KEY = 'profile_data_v1';
+    const EDIT_LOCK_KEY = 'profile_edit_lock_v1';
+
+    function safeUrl(u){
+      const v = String(u || '').trim();
+      if(!v) return '';
+      if(/^https?:\/\//i.test(v)) return v;
+      return 'https://' + v;
+    }
+    function uid(){ return 'p_' + Math.random().toString(16).slice(2) + Date.now().toString(16); }
+
+    const DEFAULT_PROFILE = {
+      avatar: 'https://images.unsplash.com/photo-1520975958225-1b6ad1f0b0a7?q=80&w=600&auto=format&fit=crop',
+      name: 'Nguyễn Văn A',
+      title: 'Full-stack Developer',
+      location: 'Hà Nội, Việt Nam',
+      phone: '+84 912 345 678',
+      email: 'hello@yourdomain.com',
+      site: 'https://yourdomain.com',
+      bio: 'Tôi xây dựng sản phẩm web/app theo hướng tối ưu trải nghiệm, tốc độ và khả năng mở rộng.',
+      stats: { projects: '24', followers: '1.2k', rating: '4.9' },
+      skills: ['Laravel','React','UI/UX','MySQL','Automation'],
+      projectsFeatured: [
+        { id: uid(), title: 'Snack Hub • Multi-tenant', badge: 'Live', badgeIcon: 'rocket_launch', desc: 'Đặt món QR + quản trị + phân quyền.', tags: ['Laravel','RBAC','Dashboard'] },
+        { id: uid(), title: 'QR Maker • Print-ready', badge: 'A4/A5', badgeIcon: 'print', desc: 'Template in 58mm, bo góc, tối ưu mobile.', tags: ['UI','PDF','Template'] },
+        { id: uid(), title: 'Thiệp cưới • Interactive', badge: 'Pro', badgeIcon: 'favorite', desc: 'Gallery, nhạc nền, hiệu ứng mượt.', tags: ['React','Animation','SEO'] },
+        { id: uid(), title: 'Admin CRM • Leads', badge: 'Analytics', badgeIcon: 'insights', desc: 'Pipeline, lọc nâng cao, phân quyền.', tags: ['CRM','Reports','Permissions'] },
+      ]
+    };
+
+    function normalizeProject(p){
+      return {
+        id: p.id || uid(),
+        title: String(p.title || '').trim(),
+        badge: String(p.badge || '').trim(),
+        badgeIcon: String(p.badgeIcon || 'rocket_launch').trim(),
+        desc: String(p.desc || '').trim(),
+        tags: Array.isArray(p.tags) ? p.tags : String(p.tags || '').split(',').map(s=>s.trim()).filter(Boolean)
+      };
+    }
+
+    function loadProfile(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return structuredClone(DEFAULT_PROFILE);
+        const data = JSON.parse(raw);
+        const base = structuredClone(DEFAULT_PROFILE);
+        const merged = {
+          ...base, ...data,
+          stats: { ...base.stats, ...(data.stats||{}) },
+          skills: Array.isArray(data.skills) ? data.skills : base.skills,
+          projectsFeatured: Array.isArray(data.projectsFeatured) ? data.projectsFeatured : base.projectsFeatured
+        };
+        merged.projectsFeatured = merged.projectsFeatured.map(p => ({ id: p.id || uid(), ...normalizeProject(p) }));
+        merged.skills = (merged.skills||[]).map(s=>String(s).trim()).filter(Boolean).slice(0, 24);
+        return merged;
+      }catch(_){
+        return structuredClone(DEFAULT_PROFILE);
+      }
+    }
+    function saveProfileLocal(p){ localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
+
+    function validateEmail(email){
+      const v = String(email||'').trim();
+      if(!v) return true;
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    // ===== Material Dialog (no confirm popup) =====
+    const dlgBackdrop = $("#dlgBackdrop");
+    const dlgTitle = $("#dlgTitle");
+    const dlgBody = $("#dlgBody");
+    const dlgActions = $("#dlgActions");
+    const dlgIcon = $("#dlgIcon");
+
+    function dlgClose(){
+      dlgBackdrop.classList.remove('show');
+      document.documentElement.style.overflow = '';
+      dlgBody.innerHTML = '';
+      dlgActions.innerHTML = '';
+    }
+    $("#dlgCloseX").addEventListener('click', dlgClose);
+    dlgBackdrop.addEventListener('click', (e)=>{ if(e.target === dlgBackdrop) dlgClose(); });
+
+    function openDialog({icon='info', title='Dialog', bodyHtml='', actions=[]}){
+      return new Promise((resolve) => {
+        dlgIcon.textContent = icon;
+        dlgTitle.textContent = title;
+        dlgBody.innerHTML = bodyHtml;
+        dlgActions.innerHTML = '';
+
+        const closeAnd = (val) => { dlgClose(); resolve(val); };
+
+        actions.forEach(a => {
+          const b = document.createElement('button');
+          b.className = `btn ${a.variant || ''}`.trim();
+          b.innerHTML = `${a.icon ? `<span class="icon">${a.icon}</span>` : ''}${escapeHtml(a.label)}<span class="ripple"></span>`;
+          b.addEventListener('click', () => {
+            if(a.onClick) a.onClick(closeAnd);
+            else closeAnd(a.value);
+          });
+          dlgActions.appendChild(b);
+        });
+
+        dlgBackdrop.classList.add('show');
+        document.documentElement.style.overflow = 'hidden';
+
+        setTimeout(()=>{
+          const inp = dlgBody.querySelector('input,textarea,button,select');
+          inp?.focus?.();
+        }, 30);
+      });
+    }
+
+    async function confirmDialog({
+      title = 'Xác nhận',
+      message = 'Bạn chắc chứ?',
+      icon = 'help',
+      danger = false,
+      okText = 'OK',
+      cancelText = 'Huỷ'
+    } = {}) {
+      const body = `
+        <div class="card pad subtle" style="border-radius:22px;">
+          <div class="section-title" style="margin-bottom:8px;">
+            <h2 style="margin:0;font-size:14px;">${escapeHtml(title)}</h2>
+            <span class="chip"><span class="icon" style="font-size:18px">${escapeHtml(icon)}</span>${danger ? 'Cẩn thận' : 'Xác nhận'}</span>
+          </div>
+          <div class="muted" style="font-size:13px;line-height:1.5">${escapeHtml(message)}</div>
+        </div>
+      `;
+
+      const res = await openDialog({
+        icon,
+        title,
+        bodyHtml: body,
+        actions: [
+          { label: cancelText, icon:'close', value: false },
+          { label: okText, icon:'check', variant: danger ? 'danger' : 'primary', value: true }
+        ]
+      });
+      return !!res;
+    }
+
+    // ===== Password lock for edit =====
+    function randHex(len=16){
+      const a = crypto.getRandomValues(new Uint8Array(len));
+      return [...a].map(x=>x.toString(16).padStart(2,'0')).join('');
+    }
+    async function sha256Hex(str){
+      const buf = await crypto.subtle.digest('SHA-256', te.encode(str));
+      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+    async function makeLockRecord(password){
+      const salt = randHex(16);
+      const hash = await sha256Hex(salt + '|' + password);
+      return { salt, hash, createdAt: new Date().toISOString() };
+    }
+    async function verifyLock(password, record){
+      if(!record?.salt || !record?.hash) return false;
+      const hash = await sha256Hex(record.salt + '|' + password);
+      return hash === record.hash;
+    }
+    function loadLock(){
+      try{ return JSON.parse(localStorage.getItem(EDIT_LOCK_KEY) || 'null'); }catch{ return null; }
+    }
+    function saveLock(rec){ localStorage.setItem(EDIT_LOCK_KEY, JSON.stringify(rec)); }
+    function clearLock(){ localStorage.removeItem(EDIT_LOCK_KEY); }
+
+    async function openSetPassword() {
+      if(!crypto?.subtle){
+        toast('err','Không hỗ trợ','Trình duyệt không hỗ trợ WebCrypto.');
+        return;
+      }
+
+      const existing = loadLock();
+
+      const body = `
+        <div class="card pad subtle" style="border-radius:22px;">
+          <div class="section-title" style="margin-bottom:8px;">
+            <h2 style="margin:0;font-size:14px;">Đặt/Đổi mật khẩu chỉnh sửa</h2>
+            <span class="chip"><span class="icon" style="font-size:18px">lock</span>Security</span>
+          </div>
+          ${ existing ? `
+          <label class="field">
+            <span class="muted" style="font-size:12px">Mật khẩu hiện tại</span>
+            <input class="input" id="curPwSet" type="password" placeholder="••••••••">
+          </label>
+          ` : '' }
+
+          <label class="field">
+            <span class="muted" style="font-size:12px">Mật khẩu mới</span>
+            <input class="input" id="newPw" type="password" placeholder="••••••••">
+          </label>
+          <label class="field">
+            <span class="muted" style="font-size:12px ;margin-top:6px">Nhập lại</span>
+            <input class="input" id="newPw2" type="password" placeholder="••••••••">
+          </label>
+
+          <div class="row" style="justify-content:space-between; flex-wrap:wrap; margin-top:8px;">
+            <span class="hint">Khuyên 8+ ký tự.</span>
+            <button class="btn danger" id="resetLockBtn"><span class="icon">delete</span>Reset khoá<span class="ripple"></span></button>
+          </div>
+        </div>
+      `;
+
+      await openDialog({
+        icon:'lock',
+        title:'Mật khẩu chỉnh sửa',
+        bodyHtml: body,
+        actions: [
+          { label:'Huỷ', icon:'close', value:null },
+          {
+            label:'Lưu mật khẩu',
+            icon:'check',
+            variant:'primary',
+            onClick: async (closeAnd) => {
+              const pw1 = $("#newPw")?.value || '';
+              const pw2 = $("#newPw2")?.value || '';
+              if(pw1.length < 6){ toast('err','Quá ngắn','Tối thiểu 6 ký tự (khuyên 8+).'); return; }
+              if(pw1 !== pw2){ toast('err','Không khớp','Nhập lại không đúng.'); return; }
+
+              // If there's an existing lock, require current password verification
+              if(existing){
+                const cur = $("#curPwSet")?.value || '';
+                const ok = await verifyLock(cur, existing);
+                if(!ok){ toast('err','Sai mật khẩu','Mật khẩu hiện tại không đúng.'); return; }
+              }
+
+              const rec = await makeLockRecord(pw1);
+              saveLock(rec);
+              toast('ok','Đã bật khoá','Từ giờ mở Chỉnh sửa sẽ yêu cầu mật khẩu.');
+              closeAnd(true);
+            }
+          }
+        ]
+      });
+      return;
+    }
+    // reset lock button click (delegation because dialog DOM dynamic)
+    document.addEventListener('click', async (e) => {
+      if(e.target.closest?.('#resetLockBtn')){
+        const rec = loadLock();
+        if(!rec){
+          toast('err','Không tìm thấy khoá','Không có khoá để reset.');
+          return;
+        }
+
+        const body = `
+          <div class="card pad subtle" style="border-radius:22px;">
+            <div class="section-title" style="margin-bottom:8px;">
+              <h2 style="margin:0;font-size:14px;">Xác nhận mật khẩu hiện tại</h2>
+              <span class="chip"><span class="icon" style="font-size:18px">lock_reset</span>Reset khoá</span>
+            </div>
+            <label class="field">
+              <span class="muted" style="font-size:12px">Mật khẩu hiện tại</span>
+              <input class="input" id="curPw" type="password" placeholder="••••••••">
+            </label>
+            <div class="hint">Nhập mật khẩu hiện tại để reset khoá. Nếu sai, thao tác sẽ bị huỷ.</div>
+          </div>
+        `;
+
+        const ok = await openDialog({
+          icon:'lock_reset',
+          title:'Reset khoá chỉnh sửa',
+          bodyHtml: body,
+          actions: [
+            { label:'Huỷ', icon:'close', value:null },
+            {
+              label:'Reset',
+              icon:'delete',
+              variant:'danger',
+              onClick: async (closeAnd) => {
+                const pw = $("#curPw")?.value || '';
+                const pass = await verifyLock(pw, rec);
+                if(!pass){
+                  toast('err','Sai mật khẩu','Mật khẩu hiện tại không đúng.');
+                  return;
+                }
+                clearLock();
+                toast('ok','Đã reset khoá','Khoá chỉnh sửa đã tắt.');
+                closeAnd(true);
+              }
+            }
+          ]
+        });
+
+        if(ok){
+          // đóng hộp thoại đặt/đổi mật khẩu (nếu đang mở)
+          dlgClose();
+        }
+      }
+    });
+
+    async function requireEditPassword() {
+      const rec = loadLock();
+      if(!rec) return true;
+
+      const body = `
+        <div class="card pad subtle" style="border-radius:22px;">
+          <div class="section-title" style="margin-bottom:8px;">
+            <h2 style="margin:0;font-size:14px;">Nhập mật khẩu để chỉnh sửa</h2>
+            <span class="chip"><span class="icon" style="font-size:18px">lock</span>Protected</span>
+          </div>
+          <label class="field">
+            <span class="muted" style="font-size:12px">Mật khẩu</span>
+            <input class="input" id="editPw" type="password" placeholder="••••••••">
+          </label>
+          <div class="hint">Sai mật khẩu sẽ không mở modal.</div>
+        </div>
+      `;
+
+      const ok = await openDialog({
+        icon:'lock_open',
+        title:'Bảo vệ chỉnh sửa',
+        bodyHtml: body,
+        actions: [
+          { label:'Huỷ', icon:'close', value:false },
+          {
+            label:'Mở',
+            icon:'check',
+            variant:'primary',
+            onClick: async (closeAnd) => {
+              const pw = $("#editPw")?.value || '';
+              const pass = await verifyLock(pw, rec);
+              if(!pass){ toast('err','Sai mật khẩu','Vui lòng thử lại.'); return; }
+              closeAnd(true);
+            }
+          }
+        ]
+      });
+
+      return !!ok;
+    }
+
+    // ===== Export / Import (plain) =====
+    function download(filename, text){
+      const blob = new Blob([text], {type:'application/json;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+    function getSafeFilename(){
+      const name = (profile.name || 'profile').toLowerCase()
+        .replace(/\s+/g,'-')
+        .replace(/[^a-z0-9\-]/g,'');
+      return name || 'profile';
+    }
+
+    async function applyImported(json){
+      const imported = (json && json.__type === "profile_export" && json.data) ? json.data : json;
+      if(!imported || typeof imported !== 'object') throw new Error('bad');
+
+      const base = structuredClone(DEFAULT_PROFILE);
+      const merged = {
+        ...base, ...imported,
+        stats: { ...base.stats, ...(imported.stats||{}) },
+        skills: Array.isArray(imported.skills) ? imported.skills : base.skills,
+        projectsFeatured: Array.isArray(imported.projectsFeatured) ? imported.projectsFeatured : base.projectsFeatured
+      };
+      merged.projectsFeatured = merged.projectsFeatured.map(p => ({ id: p.id || uid(), ...normalizeProject(p) }));
+      merged.skills = (merged.skills||[]).map(s=>String(s).trim()).filter(Boolean).slice(0, 24);
+
+      profile = merged;
+      saveProfile(profile); // will also sync firebase (hooked later)
+      renderProfile();
+    }
+
+    $("#exportBtn").addEventListener('click', () => {
+      const payload = {
+        __type: "profile_export",
+        __version: 1,
+        exportedAt: new Date().toISOString(),
+        storageKey: STORAGE_KEY,
+        data: profile
+      };
+      download(`${getSafeFilename()}-backup.json`, JSON.stringify(payload, null, 2));
+      toast('ok','Export thành công','Đã tải file JSON backup.');
+    });
+
+    $("#importBtn").addEventListener('click', () => $("#importFile").click());
+    $("#importFile").addEventListener('change', async () => {
+      const file = $("#importFile").files?.[0];
+      if(!file) return;
+      try{
+        const text = await file.text();
+        const json = JSON.parse(text);
+        await applyImported(json);
+        toast('ok','Import thành công','Đã áp dụng dữ liệu và lưu.');
+      }catch(_){
+        toast('err','Import thất bại','Không đọc được file JSON.');
+      }finally{
+        $("#importFile").value = '';
+      }
+    });
+
+    // ===== UI render =====
+    let profile = loadProfile();
+
+    const ui = {
+      avatar: $("#ui_avatar"),
+      name: $("#ui_name"),
+      title: $("#ui_title"),
+      location: $("#ui_location"),
+      statProjects: $("#ui_stat_projects"),
+      statFollowers: $("#ui_stat_followers"),
+      statRating: $("#ui_stat_rating"),
+      phone: $("#ui_phone"),
+      emailLink: $("#ui_email_link"),
+      siteLink: $("#ui_site_link"),
+      bio: $("#ui_bio"),
+      skills: $("#ui_skills"),
+      projectGrid: $("#projectGrid"),
+      previewAvatar: $("#previewAvatar"),
+      syncBadge: $("#syncBadge")
+    };
+
+    function renderSkills(){
+      ui.skills.innerHTML = '';
+      (profile.skills || []).filter(Boolean).slice(0, 14).forEach(s=>{
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.innerHTML = `<span class="icon" style="font-size:18px">bolt</span>${escapeHtml(s)}`;
+        ui.skills.appendChild(chip);
+      });
+    }
+    function renderFeaturedProjects(){
+      ui.projectGrid.innerHTML = '';
+      (profile.projectsFeatured || []).forEach(p=>{
+        const card = document.createElement('div');
+        card.className = 'p-card';
+        card.setAttribute('data-title', p.title || '');
+        const tags = Array.isArray(p.tags) ? p.tags : [];
+        card.innerHTML = `
+          <div class="p-top">
+            <p class="p-title">${escapeHtml(p.title || '')}</p>
+            <span class="chip"><span class="icon" style="font-size:18px">${escapeHtml(p.badgeIcon||'rocket_launch')}</span>${escapeHtml(p.badge||'')}</span>
+          </div>
+          <p class="p-desc">${escapeHtml(p.desc || '')}</p>
+          <div class="p-tags">${tags.slice(0,6).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>
+        `;
+        ui.projectGrid.appendChild(card);
+      });
+    }
+    function renderProfile(){
+      ui.avatar.src = profile.avatar || DEFAULT_PROFILE.avatar;
+      ui.name.textContent = profile.name || '';
+      ui.title.textContent = profile.title || '';
+      ui.location.textContent = profile.location || '';
+
+      ui.statProjects.textContent = profile.stats?.projects ?? '';
+      ui.statFollowers.textContent = profile.stats?.followers ?? '';
+      ui.statRating.textContent = profile.stats?.rating ?? '';
+
+      ui.phone.textContent = profile.phone || '';
+
+      const email = String(profile.email || '').trim();
+      ui.emailLink.textContent = email || '-';
+      ui.emailLink.href = email ? `mailto:${email}` : '#';
+
+      const site = String(profile.site || '').trim();
+      ui.siteLink.textContent = site ? site.replace(/^https?:\/\//,'') : '-';
+      ui.siteLink.href = site ? safeUrl(site) : '#';
+
+      ui.bio.textContent = profile.bio || '';
+      ui.previewAvatar.src = profile.avatar || DEFAULT_PROFILE.avatar;
+
+      renderSkills();
+      renderFeaturedProjects();
+    }
+    renderProfile();
+
+    // Search
+    $("#search").addEventListener('input', () => {
+      const q = $("#search").value.trim().toLowerCase();
+      [...ui.projectGrid.querySelectorAll('.p-card')].forEach(c => {
+        const t = (c.getAttribute('data-title') || c.innerText).toLowerCase();
+        c.style.display = t.includes(q) ? '' : 'none';
+      });
+    });
+
+    // ===== Edit modal =====
+    const backdrop = $("#backdrop");
+    function closeModal(){
+      backdrop.classList.remove('show');
+      document.documentElement.style.overflow = '';
+    }
+    $("#closeModalBtn").addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e) => { if(e.target === backdrop) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && backdrop.classList.contains('show')) closeModal(); });
+
+    function fillEditForm(){
+      $("#f_name").value = profile.name || '';
+      $("#f_title").value = profile.title || '';
+      $("#f_location").value = profile.location || '';
+      $("#f_phone").value = profile.phone || '';
+      $("#f_email").value = profile.email || '';
+      $("#f_site").value = profile.site || '';
+      $("#f_bio").value = profile.bio || '';
+      $("#f_projects").value = profile.stats?.projects ?? '';
+      $("#f_followers").value = profile.stats?.followers ?? '';
+      $("#f_rating").value = profile.stats?.rating ?? '';
+      $("#f_skills").value = (profile.skills || []).join(', ');
+
+      $("#previewAvatar").src = profile.avatar || DEFAULT_PROFILE.avatar;
+      $("#avatarFile").value = '';
+      delete $("#previewAvatar").dataset.removed;
+    }
+
+    function fileToDataURL(file){
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+    $("#avatarFile").addEventListener('change', async () => {
+      const file = $("#avatarFile").files?.[0];
+      if(!file) return;
+      if(!/^image\//.test(file.type)){
+        toast('err','Sai định dạng','Vui lòng chọn file ảnh.');
+        $("#avatarFile").value = '';
+        return;
+      }
+      if(file.size > 2.2 * 1024 * 1024){
+        toast('err','Ảnh quá lớn','Chọn ảnh <= ~2MB để lưu ổn định.');
+        $("#avatarFile").value = '';
+        return;
+      }
+      $("#previewAvatar").src = await fileToDataURL(file);
+      delete $("#previewAvatar").dataset.removed;
+      toast('ok','Đã chọn ảnh','Nhấn “Lưu” để cập nhật.');
+    });
+    $("#removeAvatarBtn").addEventListener('click', () => {
+      $("#previewAvatar").src = DEFAULT_PROFILE.avatar;
+      $("#previewAvatar").dataset.removed = '1';
+      $("#avatarFile").value = '';
+      toast('ok','Đã xoá ảnh','Nhấn “Lưu” để áp dụng.');
+    });
+
+    // Projects editor
+    let projectsBuffer = structuredClone(profile.projectsFeatured || []);
+
+    function wireDrop(list){
+      list.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const dragging = list.querySelector('.pitem.dragging');
+        const after = getDragAfterElement(list, e.clientY);
+        if(!dragging) return;
+        if(after == null) list.appendChild(dragging);
+        else list.insertBefore(dragging, after);
+      });
+
+      list.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const ids = [...list.querySelectorAll('.pitem')].map(x => x.dataset.id);
+        projectsBuffer.sort((a,b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+        renderProjectEditorFromBuffer();
+      });
+    }
+    function getDragAfterElement(container, y){
+      const els = [...container.querySelectorAll('.pitem:not(.dragging)')];
+      return els.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if(offset < 0 && offset > closest.offset){
+          return { offset, element: child };
+        }
+        return closest;
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function renderProjectEditor(){
+      projectsBuffer = structuredClone(profile.projectsFeatured || []).map(normalizeProject);
+      const list = $("#projectList");
+      list.innerHTML = '';
+
+      projectsBuffer.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = 'pitem';
+        item.draggable = true;
+        item.dataset.id = p.id;
+
+        item.innerHTML = `
+          <div class="head">
+            <div class="left">
+              <div class="drag-handle" title="Kéo để sắp xếp"><span class="icon">drag_indicator</span></div>
+              <div class="pitem-title">
+                <b>#${idx+1} — ${escapeHtml(p.title || 'Dự án mới')}</b>
+                <small>${escapeHtml((p.badgeIcon||'') + ' • ' + (p.badge||''))}</small>
+              </div>
+            </div>
+            <div class="row" style="gap:8px;">
+              <button class="btn icon" data-act="up" title="Lên"><span class="icon">arrow_upward</span><span class="ripple"></span></button>
+              <button class="btn icon" data-act="down" title="Xuống"><span class="icon">arrow_downward</span><span class="ripple"></span></button>
+              <button class="btn icon danger" data-act="del" title="Xoá"><span class="icon">delete</span><span class="ripple"></span></button>
+            </div>
+          </div>
+
+          <div class="grid3">
+            <label class="field"><span class="muted" style="font-size:12px">Tiêu đề</span>
+              <input class="input mini" data-k="title" value="${escapeHtml(p.title)}">
+            </label>
+            <label class="field"><span class="muted" style="font-size:12px">Badge</span>
+              <input class="input mini" data-k="badge" value="${escapeHtml(p.badge)}">
+            </label>
+            <label class="field"><span class="muted" style="font-size:12px">Icon badge</span>
+              <input class="input mini" data-k="badgeIcon" value="${escapeHtml(p.badgeIcon)}">
+              <div class="hint">VD: rocket_launch / print / favorite / insights</div>
+            </label>
+          </div>
+
+          <label class="field"><span class="muted" style="font-size:12px">Mô tả</span>
+            <textarea class="input" data-k="desc">${escapeHtml(p.desc)}</textarea>
+          </label>
+
+          <label class="field"><span class="muted" style="font-size:12px">Tags (phân cách ,)</span>
+            <input class="input mini" data-k="tags" value="${escapeHtml((p.tags||[]).join(', '))}">
+          </label>
+
+          <div class="row" style="justify-content:space-between; flex-wrap:wrap;">
+            <span class="badge"><span class="icon" style="font-size:18px">info</span>ID: ${escapeHtml(p.id)}</span>
+            <span class="hint">Kéo thả hoặc dùng ↑/↓.</span>
+          </div>
+        `;
+
+        item.addEventListener('input', (e) => {
+          const el = e.target;
+          const k = el?.dataset?.k;
+          if(!k) return;
+          const id = item.dataset.id;
+          const i = projectsBuffer.findIndex(x => x.id === id);
+          if(i < 0) return;
+
+          if(k === 'tags'){
+            projectsBuffer[i].tags = String(el.value||'').split(',').map(s=>s.trim()).filter(Boolean).slice(0, 10);
+          }else{
+            projectsBuffer[i][k] = String(el.value||'');
+          }
+        });
+
+        item.addEventListener('click', async (e) => {
+          const btn = e.target.closest?.('button[data-act]');
+          if(!btn) return;
+          const act = btn.dataset.act;
+          const id = item.dataset.id;
+          const i = projectsBuffer.findIndex(x => x.id === id);
+          if(i < 0) return;
+
+          if(act === 'del'){
+            const ok = await confirmDialog({
+              title:'Xoá dự án',
+              message:'Bạn chắc chắn muốn xoá dự án này?',
+              icon:'delete',
+              danger:true,
+              okText:'Xoá'
+            });
+            if(!ok) return;
+            projectsBuffer.splice(i, 1);
+            renderProjectEditorFromBuffer();
+            return;
+          }
+ if(act === 'up' && i > 0){
+            [projectsBuffer[i-1], projectsBuffer[i]] = [projectsBuffer[i], projectsBuffer[i-1]];
+            renderProjectEditorFromBuffer();
+            return;
+          }
+          if(act === 'down' && i < projectsBuffer.length - 1){
+            [projectsBuffer[i+1], projectsBuffer[i]] = [projectsBuffer[i], projectsBuffer[i+1]];
+            renderProjectEditorFromBuffer();
+            return;
+          }
+        });
+
+        item.addEventListener('dragstart', (e) => {
+          item.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', item.dataset.id);
+          $("#dropzone").classList.add('on');
+        });
+        item.addEventListener('dragend', () => {
+          item.classList.remove('dragging');
+          $("#dropzone").classList.remove('on');
+        });
+
+        list.appendChild(item);
+      });
+
+      wireDrop(list);
+    }
+
+    function renderProjectEditorFromBuffer(){
+      const keep = profile;
+      const temp = structuredClone(profile);
+      temp.projectsFeatured = structuredClone(projectsBuffer);
+      profile = temp;
+      renderProjectEditor();
+      profile = keep;
+      toast('ok','Đã cập nhật','Danh sách dự án đã đổi (nhấn Lưu để ghi).');
+    }
+
+    $("#addProjectBtn").addEventListener('click', () => {
+      projectsBuffer.unshift({
+        id: uid(),
+        title: 'Dự án mới',
+        badge: 'New',
+        badgeIcon: 'auto_awesome',
+        desc: 'Mô tả ngắn về dự án...',
+        tags: ['Tag1','Tag2']
+      });
+      renderProjectEditorFromBuffer();
+    });
+
+    $("#editBtn").addEventListener('click', async () => {
+      const allow = await requireEditPassword();
+      if(!allow) return;
+
+      fillEditForm();
+      renderProjectEditor();
+      backdrop.classList.add('show');
+      document.documentElement.style.overflow = 'hidden';
+      setTimeout(()=> $("#f_name")?.focus(), 20);
+    });
+
+    $("#saveBtn").addEventListener('click', () => {
+      const next = structuredClone(profile);
+
+      next.name = $("#f_name").value.trim();
+      next.title = $("#f_title").value.trim();
+      next.location = $("#f_location").value.trim();
+      next.phone = $("#f_phone").value.trim();
+      next.email = $("#f_email").value.trim();
+      next.site = $("#f_site").value.trim();
+      next.bio = $("#f_bio").value.trim();
+
+      next.stats = {
+        projects: $("#f_projects").value.trim(),
+        followers: $("#f_followers").value.trim(),
+        rating: $("#f_rating").value.trim()
+      };
+
+      const skills = $("#f_skills").value.split(',').map(s=>s.trim()).filter(Boolean).slice(0, 24);
+      next.skills = skills.length ? skills : structuredClone(DEFAULT_PROFILE.skills);
+
+      if(!next.name){ toast('err','Thiếu thông tin','Vui lòng nhập họ tên.'); $("#f_name").focus(); return; }
+      if(next.email && !validateEmail(next.email)){ toast('err','Email không hợp lệ','Vui lòng kiểm tra lại email.'); $("#f_email").focus(); return; }
+
+      if($("#previewAvatar").dataset.removed === '1'){
+        next.avatar = DEFAULT_PROFILE.avatar;
+        delete $("#previewAvatar").dataset.removed;
+      }else{
+        next.avatar = $("#previewAvatar").src || DEFAULT_PROFILE.avatar;
+      }
+
+      next.projectsFeatured = structuredClone(projectsBuffer).map(normalizeProject).filter(p => p.title || p.desc);
+      if(next.projectsFeatured.length === 0) next.projectsFeatured = structuredClone(DEFAULT_PROFILE.projectsFeatured);
+
+      profile = next;
+      saveProfile(profile);
+      renderProfile();
+      toast('ok','Đã lưu','Hồ sơ đã lưu Local + Firebase.');
+      closeModal();
+    });
+
+    $("#lockBtn").addEventListener('click', openSetPassword);
+
+    // Reset profile (no browser confirm)
+    $("#resetProfileBtn").addEventListener('click', async () => {
+      const ok = await confirmDialog({
+        title:'Reset hồ sơ',
+        message:'Reset toàn bộ hồ sơ về mặc định? (Không thể hoàn tác)',
+        icon:'restart_alt',
+        danger:true,
+        okText:'Reset'
+      });
+      if(!ok) return;
+
+      profile = structuredClone(DEFAULT_PROFILE);
+      saveProfile(profile);
+      renderProfile();
+      toast('ok','Đã reset','Đã reset hồ sơ (Local + Firebase).');
+    });
+
+    // ===== Dock actions =====
+    $("#dockTheme")?.addEventListener('click', () => $("#themeBtn")?.click());
+    $("#dockExport")?.addEventListener('click', () => $("#exportBtn")?.click());
+    $("#dockImport")?.addEventListener('click', () => $("#importBtn")?.click());
+    $("#dockLock")?.addEventListener('click', () => openSetPassword());
+    $("#dockEdit")?.addEventListener('click', () => $("#editBtn")?.click());
+
+    // ===== Firebase sync (hook saveProfile) =====
+    let fb = { ready:false, uid:null, ref:null, unsub:null };
+    const syncBadge = ui.syncBadge;
+
+    function setSyncBadge(state){
+      if(!syncBadge) return;
+      if(state === 'online'){
+        syncBadge.innerHTML = `<span class="icon" style="font-size:18px">cloud_done</span>Synced`;
+      }else if(state === 'syncing'){
+        syncBadge.innerHTML = `<span class="icon" style="font-size:18px">cloud_sync</span>Sync...`;
+      }else{
+        syncBadge.innerHTML = `<span class="icon" style="font-size:18px">cloud_off</span>Offline`;
+      }
+    }
+
+    // base saveProfile (will be replaced after firebase ready)
+    function saveProfile(p){
+      saveProfileLocal(p);
+    }
+
+    async function initFirebase(){
+      try{
+        // allow app even if user hasn't changed config yet
+        if(!firebaseConfig?.apiKey || firebaseConfig.apiKey === "YOUR_API_KEY"){
+          setSyncBadge('offline');
+          return;
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        setSyncBadge('syncing');
+        await signInAnonymously(auth);
+
+        onAuthStateChanged(auth, async (user) => {
+          if(!user) return;
+
+          fb.uid = user.uid;
+          fb.ref = doc(db, 'users', user.uid, 'profile', 'main');
+
+          // hook saveProfile => save local + firebase
+          const baseSave = saveProfileLocal;
+          saveProfile = async (p) => {
+            baseSave(p);
+            if(!fb.ref) return;
+            try{
+              setSyncBadge('syncing');
+              await setDoc(fb.ref, { data: p, updatedAt: new Date().toISOString() }, { merge:true });
+              setSyncBadge('online');
+            }catch{
+              setSyncBadge('offline');
+            }
+          };
+
+          // load once
+          try{
+            const snap = await getDoc(fb.ref);
+            if(snap.exists()){
+              const data = snap.data()?.data;
+              if(data){
+                profile = data;
+                saveProfileLocal(profile);
+                renderProfile();
+              }
+            }else{
+              await setDoc(fb.ref, { data: profile, updatedAt: new Date().toISOString() }, { merge:true });
+            }
+            setSyncBadge('online');
+          }catch{
+            setSyncBadge('offline');
+          }
+
+          // realtime listen
+          try{
+            if(fb.unsub) fb.unsub();
+            fb.unsub = onSnapshot(fb.ref, (s) => {
+              const incoming = s.data()?.data;
+              if(!incoming) return;
+              const now = JSON.stringify(profile);
+              const inc = JSON.stringify(incoming);
+              if(now !== inc){
+                profile = incoming;
+                saveProfileLocal(profile);
+                renderProfile();
+              }
+              setSyncBadge('online');
+            });
+          }catch{
+            setSyncBadge('offline');
+          }
+        });
+
+      }catch(e){
+        setSyncBadge('offline');
+        console.error(e);
+      }
+    }
+
+    initFirebase();
+
+    // Footer year
+    $("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

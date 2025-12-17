@@ -61,6 +61,20 @@
       --ring: 0 0 0 4px rgba(208,188,255,.20);
     }
 
+    /* Smooth theme transitions when switching themes */
+    @media (prefers-reduced-motion: no-preference) {
+      .theme-transition body,
+      .theme-transition .appbar,
+      .theme-transition .card,
+      .theme-transition .modal,
+      .theme-transition .btn,
+      .theme-transition .input,
+      .theme-transition .chip,
+      .theme-transition .cover {
+        transition: background-color .28s ease, color .28s ease, border-color .28s ease, box-shadow .28s ease, transform .18s ease;
+      }
+    }
+
     *{ box-sizing:border-box; }
     body{
       margin:0;
@@ -192,17 +206,20 @@
 
     .field{ display:grid; gap: 6px; }
     .input{
-      height: 42px;
-      border-radius: 14px;
-      padding: 0 12px;
-      border: 1px solid rgba(var(--md-outline), .60);
-      background: rgb(var(--md-surface));
+      height: 48px;
+      border-radius: 12px;
+      padding: 0 14px;
+      border: 1px solid rgba(var(--md-outline), .55);
+      background: color-mix(in oklab, rgb(var(--md-surface)) 96%, transparent);
       color: rgb(var(--md-text));
+      font-size: 15px;
       outline:none;
-      transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+      transition: box-shadow .18s cubic-bezier(.2,.9,.2,1), border-color .15s ease, background .15s ease, transform .06s ease;
+      box-shadow: 0 1px 0 rgba(16,14,20,0.02);
     }
-    .input:focus{ border-color: rgba(var(--md-primary), .85); box-shadow: var(--ring); }
-    textarea.input{ height:auto; padding: 10px 12px; min-height: 90px; resize: vertical; }
+    .input::placeholder{ color: rgba(var(--md-muted), .8); }
+    .input:focus{ border-color: rgba(var(--md-primary), .9); box-shadow: 0 6px 18px rgba(103,80,164,.12); transform: translateY(-1px); }
+    textarea.input{ height:auto; padding: 12px 14px; min-height: 120px; resize: vertical; font-size:15px; }
 
     .cover{
       height: 62px;
@@ -222,15 +239,6 @@
       position: relative;
     }
     .avatar img{ width:100%; height:100%; object-fit: cover; display:block; }
-    .avatar .cam{
-      position:absolute; right:8px; bottom:8px;
-      width: 30px; height: 30px;
-      border-radius: 12px;
-      background: color-mix(in oklab, rgb(var(--md-surface)) 75%, transparent);
-      border: 1px solid rgba(var(--md-outline), .55);
-      box-shadow: var(--e1);
-      display:grid; place-items:center;
-    }
     .name{ margin: 10px 0 2px; font-size: 20px; font-weight: 800; letter-spacing: .2px; }
     .role{ font-size: 13px; color: rgb(var(--md-muted)); display:flex; gap: 8px; align-items:center; flex-wrap:wrap; }
 
@@ -286,32 +294,41 @@
       position: fixed; inset: 0;
       background: rgba(0,0,0,.42);
       display:none;
+      pointer-events: none;
       z-index: 60;
       padding: 18px;
     }
-    .backdrop.show{ display:grid; place-items:center; }
+    .backdrop.show{ display:grid; place-items:center; pointer-events: auto; }
     .modal{
-      width: min(920px, 100%);
-      max-height: min(86vh, 900px);
+      width: min(860px, 96%);
+      max-height: min(88vh, 920px);
       overflow:auto;
-      border-radius: 26px;
-      background: rgb(var(--md-surface));
-      border: 1px solid rgba(var(--md-outline), .55);
-      box-shadow: var(--e3);
+      border-radius: 20px;
+      background: linear-gradient(180deg, color-mix(in oklab, rgb(var(--md-surface)) 96%, transparent), rgb(var(--md-surface)) 100%);
+      border: 1px solid rgba(var(--md-outline), .45);
+      box-shadow: 0 10px 30px rgba(16,14,20,0.12), 0 6px 12px rgba(16,14,20,0.06);
     }
     .modal-head{
-      position: sticky; top:0; z-index: 2;
-      padding: 14px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap: 10px;
-      background: color-mix(in oklab, rgb(var(--md-surface)) 86%, transparent);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(var(--md-outline), .45);
+      position: sticky; top:0; z-index: 3;
+      padding: 18px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap: 14px;
+      background: color-mix(in oklab, rgb(var(--md-surface)) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(var(--md-outline), .35);
+      box-shadow: 0 6px 18px rgba(16,14,20,0.04);
     }
-    .modal-head h3{ margin:0; font-size: 15px; letter-spacing:.2px; }
-    .modal-body{ padding: 14px; display:grid; gap: 12px; }
+    .modal-head h3{ margin:0; font-size: 17px; letter-spacing:.2px; font-weight:800; }
+    .modal-head .subtitle{ font-size:13px; color: rgb(var(--md-muted)); margin-top:2px; }
+    .modal-body{ padding: 18px 20px 22px; display:grid; gap: 16px; }
     .modal-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 720px){ .modal-grid{ grid-template-columns: 1fr; } }
-    .hint{ font-size: 12px; color: rgb(var(--md-muted)); margin-top: 4px; }
+    .hint{ font-size: 13px; color: rgb(var(--md-muted)); margin-top: 6px; }
+
+    /* Modal inputs */
+    .modal .input{ height:46px; border-radius:12px; padding: 0 14px; font-size:14px; }
+    .modal textarea.input{ min-height:110px; padding:12px 14px; }
+    .modal .avatar{ width:120px; height:120px; border-radius:18px; }
+    .modal .cam{ width:34px; height:34px; border-radius:10px; }
 
     .kbd{
       font-size: 12px; font-weight: 700;
@@ -489,6 +506,20 @@
           <span class="icon">upload</span>Import<span class="ripple"></span>
         </button>
 
+        <button class="btn" id="downloadCvBtn" title="Tải CV">
+          <span class="icon">file_download</span>CV<span class="ripple"></span>
+        </button>
+        <button class="btn" id="quickDownloadBtn" title="Tải nhanh CV">
+          <span class="icon">download</span>Tải nhanh<span class="ripple"></span>
+        </button>
+
+        <button class="btn" id="pushSampleBtn" title="Đẩy sample lên Firebase">
+          <span class="icon">cloud_upload</span>Push sample<span class="ripple"></span>
+        </button>
+        <button class="btn" id="syncNowBtn" title="Đồng bộ lên Firebase">
+          <span class="icon">cloud_done</span>Sync<span class="ripple"></span>
+        </button>
+
         <button class="btn primary" id="editBtn" title="Chỉnh sửa hồ sơ">
           <span class="icon">edit</span>Chỉnh sửa<span class="ripple"></span>
         </button>
@@ -508,9 +539,6 @@
             <div class="row">
               <div class="avatar" title="Ảnh đại diện">
                 <img id="ui_avatar" src="" alt="Avatar">
-                <div class="cam" title="Đổi ảnh (vào Chỉnh sửa)">
-                  <span class="icon" style="font-size:18px">photo_camera</span>
-                </div>
               </div>
             </div>
 
@@ -527,6 +555,9 @@
             <div class="stat"><b id="ui_stat_projects"></b><span>Dự án</span></div>
             <div class="stat"><b id="ui_stat_followers"></b><span>Theo dõi</span></div>
             <div class="stat"><b id="ui_stat_rating"></b><span>Đánh giá</span></div>
+            <div class="stat"><b id="ui_stat_experience"></b><span>Kinh nghiệm</span></div>
+            <div class="stat"><b id="ui_stat_clients"></b><span>Khách hàng</span></div>
+            <div class="stat"><b id="ui_stat_awards"></b><span>Giải thưởng</span></div>
           </div>
 
           <div class="divider"></div>
@@ -695,6 +726,9 @@
             <label class="field"><span class="muted" style="font-size:12px">Dự án</span><input class="input" id="f_projects" inputmode="numeric"></label>
             <label class="field"><span class="muted" style="font-size:12px">Theo dõi</span><input class="input" id="f_followers"></label>
             <label class="field"><span class="muted" style="font-size:12px">Đánh giá</span><input class="input" id="f_rating"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Kinh nghiệm (năm)</span><input class="input" id="f_experience" inputmode="numeric"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Khách hàng</span><input class="input" id="f_clients" inputmode="nunberic"></label>
+            <label class="field"><span class="muted" style="font-size:12px">Giải thưởng</span><input class="input" id="f_awards" inputmode="numeric"></label>
             <label class="field"><span class="muted" style="font-size:12px">Kỹ năng (phân cách ,)</span><input class="input" id="f_skills"></label>
           </div>
         </div>
@@ -757,21 +791,21 @@
 </nav>
 
   <script type="module">
+    // Safety: ensure backdrops are not left visible and blocking clicks on load
+    document.addEventListener('DOMContentLoaded', () => {
+      try{
+        document.getElementById('backdrop')?.classList.remove('show');
+        document.getElementById('dlgBackdrop')?.classList.remove('show');
+        document.documentElement.style.overflow = '';
+      }catch(e){ /* ignore */ }
+    });
     // ===== Firebase (Auth anonymous + Firestore) =====
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-    // ✅ THAY CONFIG CỦA BẠN
-    const firebaseConfig = {
-    apiKey: "AIzaSyB-Zjhuv0L9RCbZi9izl_ICS7o45ezfsuM",
-    authDomain: "profile-8b19c.firebaseapp.com",
-    projectId: "profile-8b19c",
-    storageBucket: "profile-8b19c.firebasestorage.app",
-    messagingSenderId: "620953315530",
-    appId: "1:620953315530:web:1c6da45f01ed99e1c9ec33",
-    measurementId: "G-Z7H1E0BEL4"
-    };
+    // Firebase config imported from external file
+    import { firebaseConfig } from './firebase-config.js';
 
     // ===== Helpers =====
     const $ = (s) => document.querySelector(s);
@@ -780,6 +814,15 @@
 
     function escapeHtml(str){
       return String(str ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    // Image fallback: replace broken avatar src with default demo avatar
+    function attachImageFallback(img){
+      if(typeof img === 'string') img = document.querySelector(img);
+      if(!img) return;
+      img.addEventListener('error', () => {
+        try{ img.src = DEFAULT_PROFILE.avatar; }catch(e){}
+      });
     }
 
     // Ripple origin
@@ -810,6 +853,14 @@
     const themeIcon = $("#themeIcon");
     const getPreferred = () => window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     function applyTheme(mode){
+      // add a temporary class to enable smooth transitions
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!prefersReduced){
+        root.classList.add('theme-transition');
+        window.clearTimeout(root._themeTimeout);
+        root._themeTimeout = window.setTimeout(() => { root.classList.remove('theme-transition'); }, 350);
+      }
+
       if(mode === 'auto') root.setAttribute('data-theme', getPreferred());
       else root.setAttribute('data-theme', mode);
       const current = root.getAttribute('data-theme');
@@ -837,7 +888,7 @@
     function uid(){ return 'p_' + Math.random().toString(16).slice(2) + Date.now().toString(16); }
 
     const DEFAULT_PROFILE = {
-      avatar: 'https://images.unsplash.com/photo-1520975958225-1b6ad1f0b0a7?q=80&w=600&auto=format&fit=crop',
+      avatar: './assets/img/logo.jpg',
       name: 'Nguyễn Văn A',
       title: 'Full-stack Developer',
       location: 'Hà Nội, Việt Nam',
@@ -845,7 +896,7 @@
       email: 'hello@yourdomain.com',
       site: 'https://yourdomain.com',
       bio: 'Tôi xây dựng sản phẩm web/app theo hướng tối ưu trải nghiệm, tốc độ và khả năng mở rộng.',
-      stats: { projects: '24', followers: '1.2k', rating: '4.9' },
+      stats: { projects: '24', followers: '1.2k', rating: '4.9', experience: '5 năm', clients: '15', awards: '3' },
       skills: ['Laravel','React','UI/UX','MySQL','Automation'],
       projectsFeatured: [
         { id: uid(), title: 'Snack Hub • Multi-tenant', badge: 'Live', badgeIcon: 'rocket_launch', desc: 'Đặt món QR + quản trị + phân quyền.', tags: ['Laravel','RBAC','Dashboard'] },
@@ -885,7 +936,6 @@
         return structuredClone(DEFAULT_PROFILE);
       }
     }
-    function saveProfileLocal(p){ localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
 
     function validateEmail(email){
       const v = String(email||'').trim();
@@ -1172,6 +1222,51 @@
       a.remove();
       URL.revokeObjectURL(url);
     }
+    function escapeAttr(str){
+      return String(str ?? '').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function isValidUrl(u){
+      try{ if(!u) return false; const url = new URL(u); return url.protocol === 'http:' || url.protocol === 'https:' || url.protocol === 'mailto:'; }catch(e){ return false; }
+    }
+    function downloadText(filename, text, mime='text/plain;charset=utf-8'){
+      const blob = new Blob([text], {type: mime});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function generateCvMarkdown(profile){
+      const lines = [];
+      lines.push(`# ${profile.name || ''}`);
+      if(profile.title) lines.push(`**${profile.title}**`);
+      if(profile.location) lines.push(`${profile.location}`);
+      lines.push('');
+      if(profile.phone) lines.push(`- Phone: ${profile.phone}`);
+      if(profile.email) lines.push(`- Email: ${profile.email}`);
+      if(profile.website) lines.push(`- Website: ${profile.website}`);
+      lines.push('');
+      if(profile.summary) lines.push(profile.summary, '');
+      if(Array.isArray(profile.skills) && profile.skills.length){
+        lines.push('## Skills', '');
+        lines.push(profile.skills.join(' • '), '');
+      }
+      if(Array.isArray(profile.projectsFeatured) && profile.projectsFeatured.length){
+        lines.push('## Projects', '');
+        profile.projectsFeatured.forEach(p => {
+          const title = p.title || 'Untitled';
+          if(isValidUrl(p.url)) lines.push(`- [${title}](${p.url}) — ${p.desc || ''}`);
+          else lines.push(`- ${title} — ${p.desc || ''}`);
+        });
+        lines.push('');
+      }
+      if(profile.experience) lines.push('## Experience', '', profile.experience, '');
+      return lines.join('\n');
+    }
     function getSafeFilename(){
       const name = (profile.name || 'profile').toLowerCase()
         .replace(/\s+/g,'-')
@@ -1191,11 +1286,12 @@
         projectsFeatured: Array.isArray(imported.projectsFeatured) ? imported.projectsFeatured : base.projectsFeatured
       };
       merged.projectsFeatured = merged.projectsFeatured.map(p => ({ id: p.id || uid(), ...normalizeProject(p) }));
-      merged.skills = (merged.skills||[]).map(s=>String(s).trim()).filter(Boolean).slice(0, 24);
-
       profile = merged;
-      saveProfile(profile); // will also sync firebase (hooked later)
+      saveProfileLocalStorage(profile);
       renderProfile();
+
+      // Return merged profile object for further use
+      return merged;
     }
 
     $("#exportBtn").addEventListener('click', () => {
@@ -1209,8 +1305,309 @@
       download(`${getSafeFilename()}-backup.json`, JSON.stringify(payload, null, 2));
       toast('ok','Export thành công','Đã tải file JSON backup.');
     });
+    // Embedded fallback PDF (small sample) — used if /resume.pdf not present on server
+    const SAMPLE_PDF_BASE64 = (
+      'JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoK' +
+      'MiAwIG9iago8PC9UeXBlL1BhZ2VzL0NvdW50IDEvS2lkc1sgMyAwIFJdPj4KZW5kb2JqCjMgMCBvYmog' +
+      'PDwvVHlwZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgNjEyIDc5Ml0vUmVzb3VyY2VzPDwv' +
+      'Rm9udDw8L0YxIDQgMCBSPj4+Pi9Db250ZW50cyA0IDAgUj4+CmVuZG9iago0IDAgb2JqCjw8L0xlbmd0' +
+      'aCAxMT4+CnN0cmVhbQpCVAovRjEgMTQgVGYgMTIwIDcwMCBUZAooSGVsbG8sIFBERikgVGoKRVQKZW5k' +
+      'c3RyZWFtCmVuZG9iago1IDAgb2JqCjw8L1R5cGUvRm9udC9TdWJ0eXBlL1R5cGUxL0Jhc2VGb250L0hl' +
+      'bHZldGljYT4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAxMTkgMDAw' +
+      'MDAgbiAKMDAwMDAwMDY0IDAwMDAwIG4gCjAwMDAwMDAxMDYgMDAwMDAgbiAKMDAwMDAwMDIyOCAwMDAw' +
+      'MCBuIAp0cmFpbGVyPDwvU2l6ZSA2L1Jvb3QgMSAwIFIvSW5mbyA1IDAgUi9JRCBbPDAwMDAwMDAwMDAw' +
+      'MDAwMD4gPDAwMDAwMDAwMDAwMDAwMD4+XT4+CnN0YXJ0eHJlZgozMDgKJSVFT0YK'
+    );
 
+    function base64ToUint8Array(b64){
+      const bin = atob(b64);
+      const len = bin.length;
+      const u8 = new Uint8Array(len);
+      for(let i=0;i<len;i++) u8[i] = bin.charCodeAt(i);
+      return u8;
+    }
+
+    async function tryDownloadResume(){
+      const name = getSafeFilename();
+      console.log('tryDownloadResume called, attempting server resume.pdf');
+      toast('ok','Bắt đầu tải','Đang thử tải resume.pdf từ máy chủ...');
+      // try to fetch server file first
+      try{
+        const resp = await fetch('./resume.pdf', { method: 'HEAD' });
+        if(resp.ok){
+          const url = './resume.pdf';
+          // try opening in new tab first (less likely to be blocked by some browsers)
+          try{
+            const w = window.open(url, '_blank');
+            if(w) { toast('ok','Tải CV','Đang mở resume.pdf trong tab mới.'); return; }
+          }catch(e){ /* ignored */ }
+
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${name}-resume.pdf`;
+          document.body.appendChild(a);
+          setTimeout(()=>{ a.click(); a.remove(); }, 60);
+          toast('ok','Tải CV','Đang tải resume.pdf từ máy chủ.');
+          return;
+        }
+      }catch(e){ console.warn('resume HEAD check failed', e); }
+
+      // fallback to embedded PDF
+      try{
+        console.log('Falling back to embedded PDF');
+        const u8 = base64ToUint8Array(SAMPLE_PDF_BASE64);
+        const blob = new Blob([u8], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        // try opening blob URL in new tab first
+        try{
+          const w = window.open(url, '_blank');
+          if(w){ toast('ok','Tải CV','Mở resume mẫu trong tab mới.'); setTimeout(()=> URL.revokeObjectURL(url), 20000); return; }
+        }catch(e){ /* ignore */ }
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${name}-resume.pdf`;
+        document.body.appendChild(a);
+        setTimeout(()=>{ a.click(); a.remove(); URL.revokeObjectURL(url); }, 60);
+        toast('ok','Tải CV','Đã tải resume mẫu.');
+      }catch(e){
+        console.error('Embedded PDF fallback failed', e);
+        // last resort: fallback to markdown CV
+        const md = generateCvMarkdown(profile || {});
+        downloadText(`${name}-CV.md`, md, 'text/markdown;charset=utf-8');
+        toast('ok','Tải CV','Đã tải CV dưới dạng Markdown.');
+      }
+    }
+
+    $("#downloadCvBtn").addEventListener('click', openExportPopup);
+
+    function loadScript(url){
+      return new Promise((resolve, reject) => {
+        if(document.querySelector(`script[src="${url}"]`)) return resolve();
+        const s = document.createElement('script');
+        s.src = url;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('Failed to load ' + url));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function exportCv(format, opts = {}){
+      // build a simple HTML representation of the CV
+      const html = buildCvHtml(profile || {});
+      const container = document.createElement('div');
+      container.id = 'cvExportContainer';
+      container.style.position = 'fixed';
+      container.style.left = '-9999px';
+      container.style.top = '0';
+      // size: 'auto' (default) or 'A4'
+      container.style.width = (opts.size === 'A4') ? '794px' : '800px';
+      container.style.zIndex = '9999';
+      container.innerHTML = html;
+      document.body.appendChild(container);
+
+      try{
+        await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+        const node = container;
+        // determine scale from DPI option (base 96 CSS DPI)
+        const dpi = parseInt(opts.dpi || '96', 10) || 96;
+        const devicePR = window.devicePixelRatio || 1;
+        const scale = (dpi / 96) * (opts.scale || 1) * devicePR;
+        const html2c = (typeof window !== 'undefined' && (window.html2canvas || window.html2c)) || (typeof html2canvas !== 'undefined' ? html2canvas : null);
+        if(!html2c) throw new Error('html2canvas not available');
+        const canvas = await html2c(node, { scale: scale, backgroundColor: '#ffffff' });
+        if(format === 'png' || format === 'jpg'){
+          const mime = format === 'png' ? 'image/png' : 'image/jpeg';
+          const quality = typeof opts.quality === 'number' ? opts.quality : 0.92;
+          const dataUrl = mime === 'image/png' ? canvas.toDataURL('image/png') : canvas.toDataURL('image/jpeg', quality);
+          if(opts.preview || opts.previewFullscreen){
+            // prepare preview image
+            const imgSrc = dataUrl;
+            if(opts.previewFullscreen){
+              // full-screen preview dialog
+              await openDialog({ icon:'visibility', title: 'Xem trước (Full)', bodyHtml: `<div style="width:100vw;height:80vh;display:flex;align-items:center;justify-content:center;background:#111;"><img src="${imgSrc}" style="max-width:100%;max-height:100%;object-fit:contain;border:6px solid #fff;"/></div>`, actions: [
+                { label: 'Tải PNG', icon: 'image', onClick: (close)=>{ const a = document.createElement('a'); a.href = imgSrc; a.download = `${getSafeFilename()}-CV.png`; document.body.appendChild(a); a.click(); a.remove(); close(); } },
+                { label: 'Tải JPG', icon: 'portrait', onClick: (close)=>{ const jpg = canvas.toDataURL('image/jpeg', quality); const a = document.createElement('a'); a.href = jpg; a.download = `${getSafeFilename()}-CV.jpg`; document.body.appendChild(a); a.click(); a.remove(); close(); } },
+                { label: 'Tải PDF', icon: 'picture_as_pdf', onClick: async (close)=>{ await exportCv('pdf', opts); close(); } },
+                { label: 'Đóng', icon: 'close' }
+              ]});
+              container.remove();
+              return;
+            }else{
+              await openDialog({ icon:'image', title: 'Xem trước', bodyHtml: `<div style="max-width:100%;"><img src="${imgSrc}" style="max-width:100%;height:auto;"/></div>`, actions: [
+                { label: 'Tải PNG', icon: 'image', onClick: (close)=>{ const a = document.createElement('a'); a.href = imgSrc; a.download = `${getSafeFilename()}-CV.png`; document.body.appendChild(a); a.click(); a.remove(); close(); } },
+                { label: 'Tải JPG', icon: 'portrait', onClick: (close)=>{ const jpg = canvas.toDataURL('image/jpeg', quality); const a = document.createElement('a'); a.href = jpg; a.download = `${getSafeFilename()}-CV.jpg`; document.body.appendChild(a); a.click(); a.remove(); close(); } },
+                { label: 'Đóng', icon: 'close' }
+              ]});
+              container.remove();
+              return;
+            }
+          }
+          const a = document.createElement('a');
+          a.href = dataUrl;
+          a.download = `${getSafeFilename()}-CV.${format === 'png' ? 'png' : 'jpg'}`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          toast('ok','Tải CV',`Đã tải CV dưới dạng ${format.toUpperCase()}.`);
+        }else if(format === 'pdf'){
+          await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+          const dataUrl = canvas.toDataURL('image/png');
+          const jspdfLib = (typeof window !== 'undefined' && window.jspdf) || (typeof jspdf !== 'undefined' ? jspdf : null);
+          if(!jspdfLib) throw new Error('jsPDF not available');
+          const jsPDF = jspdfLib.jsPDF || (jspdfLib.default && jspdfLib.default.jsPDF) || jspdfLib;
+          // if A4 requested, fit to A4 page
+          if(opts.size === 'A4'){
+            const pdf = new jsPDF({ unit: 'px', format: 'a4' });
+            const pw = pdf.internal.pageSize.getWidth();
+            const ph = pdf.internal.pageSize.getHeight();
+            const scaleFactor = Math.min(pw / canvas.width, ph / canvas.height);
+            const w = canvas.width * scaleFactor;
+            const h = canvas.height * scaleFactor;
+            pdf.addImage(dataUrl, 'PNG', (pw - w) / 2, 0, w, h);
+            pdf.save(`${getSafeFilename()}-CV.pdf`);
+          }else{
+            const pdf = new jsPDF({ unit: 'px', format: [canvas.width, canvas.height] });
+            pdf.addImage(dataUrl, 'PNG', 0, 0, canvas.width, canvas.height);
+            pdf.save(`${getSafeFilename()}-CV.pdf`);
+          }
+          toast('ok','Tải CV','Đã tải CV dưới dạng PDF.');
+        }else if(format === 'resume'){ // fetch server resume.pdf
+          try{ const resp = await fetch('./resume.pdf'); if(resp.ok){ const blob = await resp.blob(); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `${getSafeFilename()}-resume.pdf`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); toast('ok','Tải CV','Đã tải resume.pdf từ máy chủ.'); }else{ throw new Error('no server resume'); } }catch(e){ toast('err','Không tìm thấy resume.pdf','Sẽ thử tải PDF được sinh.'); await exportCv('pdf', opts); }
+        }
+      }catch(e){
+        console.error(e);
+        toast('err','Xuất thất bại','Không thể xuất file.');
+      }finally{
+        container.remove();
+      }
+    }
+
+    function buildCvHtml(profile){
+      const name = escapeHtml(profile.name || '');
+      const title = escapeHtml(profile.title || '');
+      const summary = escapeHtml(profile.summary || '');
+      const avatar = escapeAttr(profile.avatar || DEFAULT_PROFILE.avatar);
+      const skills = (profile.skills||[]).map(s=>escapeHtml(s)).join(' • ');
+      const projects = (profile.projectsFeatured||[]).map(p => {
+        const t = escapeHtml(p.title || '');
+        const desc = escapeHtml(p.desc || '');
+        return `<div style="margin-bottom:10px;"><div style="font-weight:700;margin-bottom:4px;">${t}</div><div style="color:#444;font-size:13px;">${desc}</div></div>`;
+      }).join('');
+      return `
+        <div style="font-family: Roboto, Arial, sans-serif; background:white; color:#111; padding:28px; width:760px; box-sizing:border-box;">
+          <div style="display:flex; gap:16px; align-items:center;">
+            <img src="${avatar}" style="width:120px;height:120px;border-radius:14px;object-fit:cover;border:1px solid #eee;"/>
+            <div>
+              <h1 style="margin:0 0 6px;font-size:26px;">${name}</h1>
+              <div style="color:#666;margin-bottom:8px;">${title}</div>
+              <div style="font-size:13px;color:#444;max-width:640px;">${summary}</div>
+            </div>
+          </div>
+          <hr style="border:none;border-top:1px solid #eee;margin:18px 0;" />
+          <div style="margin-bottom:12px;"><strong>Skills</strong><div style="color:#444;margin-top:6px;">${skills}</div></div>
+          <div><strong>Projects</strong><div style="margin-top:8px;">${projects}</div></div>
+        </div>
+      `;
+    }
+
+    async function openExportPopup(){
+      await openDialog({
+        icon: 'download',
+        title: 'Xuất CV',
+        bodyHtml: `
+          <div class="card pad" style="border-radius:14px;">
+            <div class="stack">
+                      <div class="hint">Chọn định dạng để xuất. PNG/JPG: ảnh màn hình CV. PDF: trang PDF chứa ảnh CV.</div>
+                      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;align-items:center;">
+                        <label style="display:flex;gap:8px;align-items:center;">
+                          <span class="muted">Khổ</span>
+                          <select id="expSize" class="input" style="height:36px;padding:6px 8px;">
+                            <option value="auto">Auto</option>
+                            <option value="A4">A4</option>
+                          </select>
+                        </label>
+                        <label style="display:flex;gap:8px;align-items:center;">
+                          <span class="muted">Chất lượng</span>
+                          <input id="expQuality" type="range" min="50" max="100" value="92" style="width:140px;" />
+                          <span id="expQualityVal" class="muted" style="width:36px;text-align:right;">92</span>
+                        </label>
+                        <label style="display:flex;gap:8px;align-items:center;">
+                          <span class="muted">DPI</span>
+                          <select id="expDpi" class="input" style="height:36px;padding:6px 8px;">
+                            <option value="96">96</option>
+                            <option value="150">150</option>
+                            <option value="300">300</option>
+                          </select>
+                        </label>
+                        <label style="display:flex;gap:8px;align-items:center;">
+                          <input id="expPreview" type="checkbox" checked /> <span class="muted">Xem trước</span>
+                        </label>
+                      </div>
+                      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+                        <button class="btn" id="expPngBtn"><span class="icon">image</span>PNG</button>
+                        <button class="btn" id="expJpgBtn"><span class="icon">portrait</span>JPG</button>
+                        <button class="btn" id="expPdfBtn"><span class="icon">picture_as_pdf</span>PDF</button>
+                        <button class="btn" id="expResumeBtn"><span class="icon">file_download</span>resume.pdf</button>
+                        <button class="btn" id="expMdBtn"><span class="icon">download</span>Markdown</button>
+                        <button class="btn" id="expPreviewBtn"><span class="icon">visibility</span>Preview</button>
+                        <button class="btn" id="expPreviewFullBtn"><span class="icon">open_in_full</span>Preview full</button>
+                        <button class="btn primary" id="expDownloadNow" title="Tải ngay resume.pdf"><span class="icon">file_download</span>Tải ngay</button>
+                        <label style="display:flex;align-items:center;gap:8px;margin-left:6px;">
+                          <input id="expNoConfirm" type="checkbox" /> <span class="muted">Không hỏi lại</span>
+                        </label>
+                      </div>
+            </div>
+          </div>
+        `,
+        actions: [
+          { label: 'Đóng', icon: 'close', variant: '' }
+        ]
+      });
+
+      // wire buttons inside dialog
+      setTimeout(()=>{
+        const getOpts = () => ({ size: $('#expSize')?.value || 'auto', quality: (parseInt($('#expQuality')?.value||'92')/100), preview: !!$('#expPreview')?.checked, dpi: ($('#expDpi')?.value || '96') });
+        $('#expQuality')?.addEventListener('input', (e)=>{ $('#expQualityVal').textContent = e.target.value; });
+
+        // initialize 'Không hỏi lại' checkbox from localStorage
+        const noConfirmKey = 'pref_no_export_confirm';
+        const noConfirmCheckbox = $('#expNoConfirm');
+        if(noConfirmCheckbox){
+          try{ noConfirmCheckbox.checked = localStorage.getItem(noConfirmKey) === '1'; }catch(e){}
+          noConfirmCheckbox.addEventListener('change', (e)=>{ try{ localStorage.setItem(noConfirmKey, e.target.checked ? '1' : '0'); }catch(_){}});
+        }
+
+        async function confirmAndExport(format, opts){
+          // if user disabled confirm, proceed directly
+          let skip = false;
+          try{ skip = localStorage.getItem(noConfirmKey) === '1'; }catch(e){ skip = false; }
+          if(!skip){
+            const msg = `Bạn có chắc muốn xuất CV dưới dạng ${String(format).toUpperCase()}?`;
+            const ok = await confirmDialog({ title: 'Xác nhận xuất', message: msg, icon: 'help', okText: 'Xuất', cancelText: 'Huỷ' });
+            if(!ok){ toast('ok','Huỷ xuất','Đã huỷ thao tác xuất.'); return; }
+          }
+          if(format === 'md' || format === 'markdown'){
+            const md = generateCvMarkdown(profile||{});
+            downloadText(`${getSafeFilename()}-CV.md`, md, 'text/markdown;charset=utf-8');
+            toast('ok','Tải CV','Đã tải CV dưới dạng Markdown.');
+          }else{
+            await exportCv(format, opts);
+          }
+        }
+
+        $('#expPngBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); confirmAndExport('png', opts); dlgClose(); });
+        $('#expJpgBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); confirmAndExport('jpg', opts); dlgClose(); });
+        $('#expPdfBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); confirmAndExport('pdf', opts); dlgClose(); });
+        $('#expResumeBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); confirmAndExport('resume', opts); dlgClose(); });
+        $('#expMdBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); confirmAndExport('md', opts); dlgClose(); });
+        $('#expPreviewBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); exportCv('png', {...opts, preview:true}); dlgClose(); });
+        $('#expPreviewFullBtn')?.addEventListener('click', ()=>{ const opts = getOpts(); exportCv('png', {...opts, previewFullscreen:true}); dlgClose(); });
+        $('#expDownloadNow')?.addEventListener('click', ()=>{ tryDownloadResume(); dlgClose(); });
+      }, 30);
+    }
     $("#importBtn").addEventListener('click', () => $("#importFile").click());
+    $("#quickDownloadBtn").addEventListener('click', tryDownloadResume);
     $("#importFile").addEventListener('change', async () => {
       const file = $("#importFile").files?.[0];
       if(!file) return;
@@ -1218,11 +1615,49 @@
         const text = await file.text();
         const json = JSON.parse(text);
         await applyImported(json);
-        toast('ok','Import thành công','Đã áp dụng dữ liệu và lưu.');
+        // Attempt to auto-sync after import if firebase is ready
+        if(fb?.push){
+          try{ await fb.push(profile); toast('ok','Import & Sync','Dữ liệu đã được import và đồng bộ lên Firebase.'); }
+          catch(e){ console.error(e); toast('ok','Import thành công','Đã áp dụng dữ liệu và lưu (local). Đồng bộ thất bại.'); }
+        }else{
+          toast('ok','Import thành công','Đã áp dụng dữ liệu và lưu (local). Bấm Sync để đẩy lên Firebase.');
+        }
       }catch(_){
         toast('err','Import thất bại','Không đọc được file JSON.');
       }finally{
         $("#importFile").value = '';
+      }
+    });
+
+    $("#pushSampleBtn").addEventListener('click', async () => {
+      try{
+        const res = await fetch('sample-profile.json');
+        if(!res.ok) throw new Error('fetch failed');
+        const json = await res.json();
+        await applyImported(json);
+        if(fb?.push){
+          try{ await fb.push(profile); toast('ok','Sample nạp & Sync','Sample đã nạp và đồng bộ lên Firebase.'); }
+          catch(e){ console.error(e); toast('ok','Sample nạp','Sample đã nạp (local). Đồng bộ thất bại.'); }
+        }else{
+          toast('ok','Sample nạp','Sample đã nạp (local). Bấm Sync để đẩy lên Firebase.');
+        }
+      }catch(e){
+        console.error(e);
+        toast('err','Thất bại','Không thể nạp sample.');
+      }
+    });
+
+    $("#syncNowBtn").addEventListener('click', async () => {
+      if(!fb.ref){ toast('err','Chưa kết nối','Firebase chưa sẵn sàng hoặc chưa cấu hình.'); return; }
+      try{
+        setSyncBadge('syncing');
+        await setDoc(fb.ref, { data: profile, updatedAt: new Date().toISOString() }, { merge:true });
+        setSyncBadge('online');
+        toast('ok','Đã sync','Dữ liệu đã được đẩy lên Firebase.');
+      }catch(e){
+        console.error(e);
+        setSyncBadge('offline');
+        toast('err','Sync thất bại','Không thể đẩy dữ liệu lên Firebase.');
       }
     });
 
@@ -1237,6 +1672,9 @@
       statProjects: $("#ui_stat_projects"),
       statFollowers: $("#ui_stat_followers"),
       statRating: $("#ui_stat_rating"),
+      statExperience: $("#ui_stat_experience"),
+      statClients: $("#ui_stat_clients"),
+      statAwards: $("#ui_stat_awards"),
       phone: $("#ui_phone"),
       emailLink: $("#ui_email_link"),
       siteLink: $("#ui_site_link"),
@@ -1263,9 +1701,12 @@
         card.className = 'p-card';
         card.setAttribute('data-title', p.title || '');
         const tags = Array.isArray(p.tags) ? p.tags : [];
+        const titleHtml = isValidUrl(p.url || '')
+          ? `<a class="p-title" href="${escapeAttr(p.url)}" target="_blank" rel="noopener">${escapeHtml(p.title || '')}</a>`
+          : `<p class="p-title">${escapeHtml(p.title || '')}</p>`;
         card.innerHTML = `
           <div class="p-top">
-            <p class="p-title">${escapeHtml(p.title || '')}</p>
+            ${titleHtml}
             <span class="chip"><span class="icon" style="font-size:18px">${escapeHtml(p.badgeIcon||'rocket_launch')}</span>${escapeHtml(p.badge||'')}</span>
           </div>
           <p class="p-desc">${escapeHtml(p.desc || '')}</p>
@@ -1276,6 +1717,7 @@
     }
     function renderProfile(){
       ui.avatar.src = profile.avatar || DEFAULT_PROFILE.avatar;
+      attachImageFallback(ui.avatar);
       ui.name.textContent = profile.name || '';
       ui.title.textContent = profile.title || '';
       ui.location.textContent = profile.location || '';
@@ -1283,6 +1725,9 @@
       ui.statProjects.textContent = profile.stats?.projects ?? '';
       ui.statFollowers.textContent = profile.stats?.followers ?? '';
       ui.statRating.textContent = profile.stats?.rating ?? '';
+      ui.statExperience.textContent = profile.stats?.experience ?? '';
+      ui.statClients.textContent = profile.stats?.clients ?? '';
+      ui.statAwards.textContent = profile.stats?.awards ?? '';
 
       ui.phone.textContent = profile.phone || '';
 
@@ -1296,6 +1741,7 @@
 
       ui.bio.textContent = profile.bio || '';
       ui.previewAvatar.src = profile.avatar || DEFAULT_PROFILE.avatar;
+      attachImageFallback(ui.previewAvatar);
 
       renderSkills();
       renderFeaturedProjects();
@@ -1332,6 +1778,9 @@
       $("#f_projects").value = profile.stats?.projects ?? '';
       $("#f_followers").value = profile.stats?.followers ?? '';
       $("#f_rating").value = profile.stats?.rating ?? '';
+      $("#f_experience").value = profile.stats?.experience ?? '';
+      $("#f_clients").value = profile.stats?.clients ?? '';
+      $("#f_awards").value = profile.stats?.awards ?? '';
       $("#f_skills").value = (profile.skills || []).join(', ');
 
       $("#previewAvatar").src = profile.avatar || DEFAULT_PROFILE.avatar;
@@ -1555,7 +2004,7 @@
       setTimeout(()=> $("#f_name")?.focus(), 20);
     });
 
-    $("#saveBtn").addEventListener('click', () => {
+    $("#saveBtn").addEventListener('click', async () => {
       const next = structuredClone(profile);
 
       next.name = $("#f_name").value.trim();
@@ -1569,7 +2018,11 @@
       next.stats = {
         projects: $("#f_projects").value.trim(),
         followers: $("#f_followers").value.trim(),
-        rating: $("#f_rating").value.trim()
+        rating: $("#f_rating").value.trim(),
+        experience: $("#f_experience").value.trim(),
+        clients: $("#f_clients").value.trim(),
+        awards: $("#f_awards").value.trim()
+
       };
 
       const skills = $("#f_skills").value.split(',').map(s=>s.trim()).filter(Boolean).slice(0, 24);
@@ -1589,9 +2042,20 @@
       if(next.projectsFeatured.length === 0) next.projectsFeatured = structuredClone(DEFAULT_PROFILE.projectsFeatured);
 
       profile = next;
-      saveProfile(profile);
+      saveProfileLocalStorage(profile);
       renderProfile();
-      toast('ok','Đã lưu','Hồ sơ đã lưu Local + Firebase.');
+      // Attempt to sync immediately if firebase push helper is available
+      if(fb?.push){
+        try{
+          await fb.push(profile);
+          toast('ok','Đã lưu & đồng bộ','Hồ sơ đã lưu và đồng bộ lên Firebase.');
+        }catch(e){
+          console.error(e);
+          toast('ok','Đã lưu','Hồ sơ đã lưu local. Đồng bộ thất bại.');
+        }
+      }else{
+        toast('ok','Đã lưu','Hồ sơ đã lưu (local). Bấm Sync để đẩy lên Firebase.');
+      }
       closeModal();
     });
 
@@ -1609,14 +2073,20 @@
       if(!ok) return;
 
       profile = structuredClone(DEFAULT_PROFILE);
-      saveProfile(profile);
+      saveProfileLocalStorage(profile);
       renderProfile();
-      toast('ok','Đã reset','Đã reset hồ sơ (Local + Firebase).');
+      // Attempt to auto-sync reset to Firebase
+      if(fb?.push){
+        try{ await fb.push(profile); toast('ok','Đã reset & Sync','Hồ sơ đã reset và đồng bộ lên Firebase.'); }
+        catch(e){ console.error(e); toast('ok','Đã reset','Hồ sơ đã reset (local). Đồng bộ thất bại.'); }
+      }else{
+        toast('ok','Đã reset','Hồ sơ đã reset (local). Bấm Sync để đẩy lên Firebase.');
+      }
     });
 
     // ===== Dock actions =====
     $("#dockTheme")?.addEventListener('click', () => $("#themeBtn")?.click());
-    $("#dockExport")?.addEventListener('click', () => $("#exportBtn")?.click());
+    $("#dockExport")?.addEventListener('click', () => openExportPopup());
     $("#dockImport")?.addEventListener('click', () => $("#importBtn")?.click());
     $("#dockLock")?.addEventListener('click', () => openSetPassword());
     $("#dockEdit")?.addEventListener('click', () => $("#editBtn")?.click());
@@ -1636,15 +2106,19 @@
       }
     }
 
-    // base saveProfile (will be replaced after firebase ready)
-    function saveProfile(p){
-      saveProfileLocal(p);
+    // base saveProfileLocal (always available) — only saves to localStorage
+    function saveProfileLocal(p){
+      saveProfileLocalStorage(p);
     }
+    // keep old name for internal simple usage
+    function saveProfileLocalStorage(p){ localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
 
     async function initFirebase(){
       try{
+        console.log('initFirebase: firebaseConfig=', firebaseConfig);
         // allow app even if user hasn't changed config yet
-        if(!firebaseConfig?.apiKey || firebaseConfig.apiKey === "YOUR_API_KEY"){
+        // treat as "not configured" when apiKey or projectId is missing
+        if(!firebaseConfig || !firebaseConfig.apiKey || !firebaseConfig.projectId){
           setSyncBadge('offline');
           return;
         }
@@ -1662,19 +2136,18 @@
           fb.uid = user.uid;
           fb.ref = doc(db, 'users', user.uid, 'profile', 'main');
 
-          // hook saveProfile => save local + firebase
-          const baseSave = saveProfileLocal;
-          saveProfile = async (p) => {
-            baseSave(p);
-            if(!fb.ref) return;
-            try{
-              setSyncBadge('syncing');
-              await setDoc(fb.ref, { data: p, updatedAt: new Date().toISOString() }, { merge:true });
-              setSyncBadge('online');
-            }catch{
-              setSyncBadge('offline');
-            }
-          };
+            // provide helper to push local -> firebase on demand
+            fb.push = async (p) => {
+              if(!fb.ref) throw new Error('no-ref');
+              try{
+                setSyncBadge('syncing');
+                await setDoc(fb.ref, { data: p, updatedAt: new Date().toISOString() }, { merge:true });
+                setSyncBadge('online');
+              }catch(e){
+                setSyncBadge('offline');
+                throw e;
+              }
+            };
 
           // load once
           try{
@@ -1716,7 +2189,7 @@
 
       }catch(e){
         setSyncBadge('offline');
-        console.error(e);
+        console.error('initFirebase error:', e);
       }
     }
 

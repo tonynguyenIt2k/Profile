@@ -1,0 +1,46 @@
+{
+  "__type": "profile_export",
+  "data": {
+    "avatar": "https://images.unsplash.com/photo-1520975958225-1b6ad1f0b0a7?q=80&w=600&auto=format&fit=crop",
+    "name": "Nguyễn Văn A",
+    "title": "Full-stack Developer",
+    "location": "Hà Nội, Việt Nam",
+    "phone": "+84 912 345 678",
+    "email": "hello@yourdomain.com",
+    "site": "https://yourdomain.com",
+    "bio": "Tôi xây dựng sản phẩm web/app theo hướng tối ưu trải nghiệm, tốc độ và khả năng mở rộng.",
+    "stats": {
+      "projects": "24",
+      "followers": "1.2k",
+      "rating": "4.9",
+      "experience": "5 năm",
+      "clients": "15",
+      "awards": "3"
+    },
+    "skills": [
+      "Laravel",
+      "React",
+      "UI/UX",
+      "MySQL",
+      "Automation"
+    ],
+    "projectsFeatured": [
+      {
+        "id": "p_sample_1",
+        "title": "Snack Hub • Multi-tenant",
+        "badge": "Live",
+        "badgeIcon": "rocket_launch",
+        "desc": "Đặt món QR + quản trị + phân quyền.",
+        "tags": ["Laravel", "RBAC", "Dashboard"]
+      },
+      {
+        "id": "p_sample_2",
+        "title": "QR Maker • Print-ready",
+        "badge": "A4/A5",
+        "badgeIcon": "print",
+        "desc": "Template in 58mm, bo góc, tối ưu mobile.",
+        "tags": ["UI", "PDF", "Template"]
+      }
+    ]
+  }
+}

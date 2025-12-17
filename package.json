@@ -1,0 +1,11 @@
+{
+  "name": "profile-push-sample",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "push-sample": "node push-sample.js"
+  },
+  "dependencies": {
+    "firebase": "10.12.5"
+  }
+}
